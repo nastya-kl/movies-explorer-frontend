@@ -1,0 +1,78 @@
+.student {
+  background-color: #202020;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.student__container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 75px 70px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.student__info-container {
+  margin-top: 26px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.student__text-info {
+  max-width: 600px;
+  margin-right: 30px;
+}
+
+.student__name {
+  margin: 0 0 18px;
+  letter-spacing: -2px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  word-wrap: break-word;
+}
+
+.student__info {
+  max-width: 1280px;
+  margin: 19px 0 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.student__about {
+  margin: 0;
+  min-height: 88px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.student__link {
+  display: inline-block;
+  margin: 99px 0 101px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity .3s linear 0s;
+}
+
+.student__link:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.student__photo {
+  background-image: url(../../../images/student-photo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-width: 270px;
+  min-height: 327px;
+  align-self: start;
+  border-radius: 10px;
+}

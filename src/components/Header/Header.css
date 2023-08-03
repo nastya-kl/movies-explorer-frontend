@@ -1,0 +1,67 @@
+.header {
+  background-color: #073042;
+  margin: 0 auto;
+}
+
+.header__container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.header__logo {
+  background-image: url(../../images/header-logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 38px 38px;
+  min-width: 38px;
+  min-height: 38px;
+  margin: 18px 0;
+}
+
+.header__authorization-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+  align-items: center;
+  margin: 0;
+}
+
+.header__registration {
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+  transition: opacity .3s linear 0s;
+}
+
+.header__registration:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.header__login-button {
+  background-color: #3DDC84;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: none;
+  min-height: 32px;
+  max-width: 76px;
+  border-radius: 3px;
+  transition: opacity .3s linear 0s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header__login-button:hover {
+  opacity: .8;
+  cursor: pointer;
+}

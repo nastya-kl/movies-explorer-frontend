@@ -1,0 +1,68 @@
+.promo {
+  background-color: #073042;
+  margin: 0 auto;
+}
+
+.promo__container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 75px 70px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.promo__heading-container {
+  max-width: 640px;
+}
+
+.promo__heading {
+  color: #fff;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  min-height: 174px;
+  max-width: 640px;
+  margin: 0 0 36px 0;
+}
+
+.promo__info {
+  color: #fff;
+  opacity: .5;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 32px;
+  max-width: 310px;
+  margin: 0 0 146px 0;
+}
+
+.promo__learn-more {
+  background-color: #073042;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .6);
+  border-radius: 3px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity .3s linear 0s;
+  padding: 0 20px;
+}
+
+.promo__learn-more:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.promo__image {
+  background-image: url(../../../images/promo-earth.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 310px 304px;
+  min-width: 310px;
+  min-height: 304px;
+  align-self: start;
+}
