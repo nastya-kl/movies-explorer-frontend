@@ -1,6 +1,13 @@
 .header {
-  background-color: #073042;
   margin: 0 auto;
+}
+
+.header_color_blue {
+  background-color: #073042;
+}
+
+.header_color_gray {
+  background-color: #202020;
 }
 
 .header__container {
@@ -11,6 +18,7 @@
   flex-direction: row;
   justify-content: space-between;
   box-sizing: border-box;
+  align-items: center;
 }
 
 .header__logo {
@@ -39,6 +47,7 @@
   padding: 0;
   margin: 0;
   transition: opacity .3s linear 0s;
+  text-decoration: none;
 }
 
 .header__registration:hover {
@@ -53,15 +62,73 @@
   font-size: 12px;
   line-height: 16px;
   border: none;
-  min-height: 32px;
-  max-width: 76px;
+  width: 100%;
+  padding: 8px 0;
   border-radius: 3px;
   transition: opacity .3s linear 0s;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+  text-align: center;
 }
 
 .header__login-button:hover {
   opacity: .8;
   cursor: pointer;
+}
+
+.header__movies-container {
+  display: flex;
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 212px;
+  margin-left: 61px;
+}
+
+.header__all-movies {
+  font-weight: 500;
+  margin: 0;
+  margin-right: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity .3s linear 0s;
+}
+
+.header__saved-movies {
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity .3s linear 0s;
+}
+
+.header__account-container {
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 100px;
+}
+
+.header__account{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity .3s linear 0s;
+}
+
+.header__account-logo {
+  background-color: #313131;
+  background-image: url('../../images/accaunt-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11.5px 14px;
+  min-width: 26px;
+  min-height: 30px;
+  border-radius: 4px;
+  margin-left: 18px;
 }

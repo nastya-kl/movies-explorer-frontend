@@ -66,5 +66,4 @@
 .portfolio__text:hover {
   opacity: .7;
   cursor: pointer;
-  transition: opacity .3s linear 0s;
 }

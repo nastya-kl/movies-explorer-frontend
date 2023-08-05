@@ -11,3 +11,7 @@
   margin: 0 auto;
   font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
+
+:Link:hover {
+  opacity: .8;
+}
