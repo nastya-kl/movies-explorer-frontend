@@ -15,7 +15,7 @@ import fourteenImage from '../images/movies-images/movie-14.png';
 import fifteenImage from '../images/movies-images/movie-15.png';
 import sixteenImage from '../images/movies-images/movie-16.png';
 
-const moviesList = [
+export const moviesList = [
   {
     image: oneImage,
     title: '33 слова о дизайне',
@@ -98,4 +98,20 @@ const moviesList = [
   },
 ]
 
-export default moviesList;
+export const savedMoviesList = [
+  {
+    image: oneImage,
+    title: '33 слова о дизайне',
+    duration: '1ч42м',
+  },
+  {
+    image: twoImage,
+    title: '33 слова о дизайне',
+    duration: '1ч42м',
+  },
+  {
+    image: threeImage,
+    title: '33 слова о дизайне',
+    duration: '1ч42м',
+  },
+]

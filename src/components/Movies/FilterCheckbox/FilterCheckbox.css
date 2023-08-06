@@ -1,11 +1,14 @@
 .filter-checkbox {
   background-color: #202020;
-  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 }
 
 .filter-checkbox__container {
-  max-width: 1140px;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0 70px;
   padding: 29px 70px 39px;
   display: flex;
   align-items: center;

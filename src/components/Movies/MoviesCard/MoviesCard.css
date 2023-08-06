@@ -1,6 +1,7 @@
 .movie {
   display: flex;
   flex-direction: column;
+  justify-self: center;
   max-width: 270px;
   min-height: 218px;
   background-color: #222222;

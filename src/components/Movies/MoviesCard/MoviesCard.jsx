@@ -2,7 +2,6 @@ import React from "react";
 import "./MoviesCard.css";
 
 function MoviesCard(props) {
-  // Просто пример, чтобы проверить клик по кнопке сохранения, потом будет другая реализация
   const [isLiked, setIsLiked] = React.useState(false);
 
   const saveButtonClassName = `movie__save-button ${!isLiked ? 'movie__save-button_status_inactive' : 'movie__save-button_status_active'}`
