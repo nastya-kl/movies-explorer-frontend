@@ -34,7 +34,8 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  transition: opacity .3s linear 0s;}
+  transition: opacity .3s linear 0s;
+}
 
 .movies-list__show-more-btn:hover {
   opacity: .8;
