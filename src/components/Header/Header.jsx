@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./Header.css";
 
-function Header() {
+function Header(isloggedIn) {
   const location = useLocation();
   const pathName =
     location.pathname === "/signin" || location.pathname === "/signup";
@@ -17,7 +17,7 @@ function Header() {
         <div className='header__container'>
           <Link className='header__logo' to='/'></Link>
 
-          {location.pathname === "/" ? (
+          {(location.pathname === "/") ? (
             <div className='header__authorization-container'>
               <Link to='/signup' className='header__registration'>
                 Регистрация
@@ -52,7 +52,10 @@ function Header() {
               </div>
               <div className='header__account-container'>
                 <Link to='/profile' className='header__account'>
-                  Аккаунт<div className='header__account-logo'></div>
+                  Аккаунт
+                  <div
+                    className='header__account-logo'
+                  ></div>
                 </Link>
               </div>
             </>

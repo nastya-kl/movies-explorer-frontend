@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import "./Profile.css";
 
-function Profile() {
+function Profile({setIsLoggedIn, isLoggedIn}) {
   const profileName = "Виталий";
   const profileEmail = "pochta@yandex.ru";
   const navigate = useNavigate();
@@ -38,8 +38,10 @@ function Profile() {
     setIsEdition(false);
   }
 
-  function handleLogout() {
+  const handleSignout = () => {
     navigate('/', { replace: true });
+    setIsLoggedIn(false);
+    console.log(isLoggedIn);
   }
 
   return (
@@ -79,7 +81,7 @@ function Profile() {
                 >
                   Редактировать
                 </button>
-                <button className='profile__logout-button' onClick={handleLogout}>
+                <button className='profile__logout-button' onClick={handleSignout}>
                   Выйти из аккаунта
                 </button>
               </>

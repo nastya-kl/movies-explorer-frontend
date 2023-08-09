@@ -131,3 +131,7 @@
   border-radius: 4px;
   margin-left: 18px;
 }
+
+.header__account-logo_color_blue {
+  background-color: #0d4a64;
+}
