@@ -18,21 +18,20 @@
   letter-spacing: -1px;
   font-weight: 400;
   font-size: 22px;
-  line-height: 16px;
-  margin: 40px 0;
-  padding-bottom: 29px;
+  line-height: 27px;
+  margin: 35px 0 40px;
+  padding-bottom: 23px;
   border-bottom: 1px solid #DADADA;
 }
 
 .project__description-container {
   max-width: 1140px;
-  margin: 30px 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 2fr;
-  column-gap: 40px;
+  margin: 30px 0 38px;
+  padding: 0;
+  display: flex;
   row-gap: 26px;
-  align-items: flex-start;
+  list-style: none;
+  justify-content: space-between;
 }
 
 .project__description-heading {
@@ -42,7 +41,7 @@
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  margin: 0;
+  margin: 0 0 26px 0;
 }
 
 .project__description {
@@ -90,4 +89,85 @@
   font-size: 14px;
   line-height: 17px;
   color: #8B8B8B;
+}
+
+@media screen and (max-width: 768px) {
+  .project__container {
+    max-width: 768px;
+    padding: 75px 50px;
+  }
+
+  .project__heading {
+    max-width: 668px;
+    margin: 15px 0 40px;
+  }
+
+  .project__description-container {
+    column-gap: 30px;
+    margin-bottom: 93px;
+  }
+
+  .project__description-heading {
+    margin-bottom: 22px;
+  }
+
+  .project__description {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .project__duration {
+    margin: 0 0 15px;
+    grid-template-columns: 1fr 3.8fr;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .project__container {
+    max-width: 540px;
+    padding: 70px 18px 30px;
+  }
+
+  .project__heading {
+    max-width: 510px;
+    margin: 0 0 40px;
+    letter-spacing: -0.7px;
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+
+  .project__description-container {
+    margin: 21px 0 60px;
+    flex-direction: column;
+    row-gap: 55px;
+  }
+
+  .project__description-heading {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+
+  .project__description {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .project__week {
+    font-size: 11px;
+    line-height: 13px;
+    padding: 11px 0;
+  }
+
+  .project__specialization {
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .project__duration {
+    margin: 0 0 15px;
+    grid-template-columns: 1fr 1.8fr;
+    row-gap: 10px;
+  }
 }

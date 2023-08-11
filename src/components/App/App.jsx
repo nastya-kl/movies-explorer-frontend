@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -9,15 +9,15 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
-  console.log(isLoggedIn);
+  const [isPageNotFoundOpen, setIsPageNotFoundOpen] = React.useState(false);
 
   return (
     <div className='page'>
-      <Header isloggedIn={isLoggedIn} />
+      {!isPageNotFoundOpen && <Header isloggedIn={isLoggedIn} />}
 
       <Routes>
         <Route path='/' element={<Main />} />
@@ -51,11 +51,11 @@ function App() {
         <Route path='/signup' element={<Register />} />
         <Route
           path='*'
-          element={isLoggedIn ? <Navigate to='/movies' /> : <Navigate to='/' />}
+          element={<PageNotFound setIsPageNotFoundOpen={setIsPageNotFoundOpen}/> }
         />
       </Routes>
 
-      <Footer />
+      {!isPageNotFoundOpen && <Footer />}
     </div>
   );
 }

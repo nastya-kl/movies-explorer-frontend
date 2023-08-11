@@ -24,11 +24,12 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
+  transition: box-shadow .3s linear 0s;
 }
 
 .search-form__input:focus {
   outline: 0;
-  box-shadow: 0px 0px 3px 1px rgba(144, 144, 144, 0.7)
+  box-shadow: 0px 0px 3px 1px rgba(144, 144, 144, 0.7);
 }
 
 .search-form__button {
@@ -48,4 +49,24 @@
 .search-form__button:hover {
   opacity: .7;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form__container {
+    max-width: 768px;
+    padding: 79px 30px 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .search-form__container {
+    max-width: 540px;
+    padding: 80px 14px 43px;
+  }
+
+  .search-form__input {
+    min-height: 44px;
+    font-size: 12px;
+    padding-left: 16px;
+  }
 }

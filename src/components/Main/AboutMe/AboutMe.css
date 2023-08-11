@@ -36,7 +36,7 @@
 
 .student__info {
   max-width: 1280px;
-  margin: 19px 0 25px;
+  margin: 0 0 25px;
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
@@ -67,12 +67,94 @@
 }
 
 .student__photo {
-  background-image: url(../../../images/student-photo.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  min-width: 270px;
-  min-height: 327px;
+  object-fit: contain;
+  max-width: 270px;
+  height: 327px;
   align-self: start;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .student__container {
+    max-width: 768px;
+    padding: 75px 50px;
+  }
+
+  .student__text-info {
+    max-width: 364px;
+  }
+
+  .student__name {
+    letter-spacing: -1.7px;
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .student__info {
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+
+  .student__about {
+    margin: 0;
+    min-height: 108px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  .student__link {
+    margin: 87px 0 16px;
+  }
+
+  .student__photo {
+    max-width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .student__container {
+    max-width: 540px;
+    padding: 73px 14px 30px;
+  }
+
+  .student__info-container {
+    flex-direction: column-reverse;
+    margin: 20px auto 0;
+  }
+
+  .student__text-info {
+    max-width: 480px;
+    margin: 0;
+  }
+
+  .student__photo {
+    object-fit: cover;
+    max-width: 292px;
+    height: 352px;
+    margin: 0 auto 40px;
+  }
+
+  .student__name {
+    letter-spacing: -1.3px;
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 20px;
+  }
+
+  .student__info {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__about {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__link {
+    margin: 40px 0 40px;
+  }
 }

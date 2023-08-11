@@ -64,3 +64,22 @@
   transform: translateX(16px);
 }
 
+@media screen and (max-width: 768px) {
+  .filter-checkbox__container {
+    max-width: 768px;
+    padding: 0 70px 39px;
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .filter-checkbox__container {
+    max-width: 540px;
+    padding: 0 70px 43px;
+    margin: 0 30px;
+  }
+
+  .filter-checkbox__text {
+  font-size: 11px;
+  }
+}

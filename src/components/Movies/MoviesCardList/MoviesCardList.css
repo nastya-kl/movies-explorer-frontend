@@ -40,3 +40,36 @@
 .movies-list__show-more-btn:hover {
   opacity: .8;
 }
+
+@media screen and (max-width: 990px) {
+  .movies-list {
+    max-width: 768px;
+    padding: 0 30px;
+    min-height: 798px;
+  }
+
+  .movies-list__container  {
+    grid-template-columns: repeat(auto-fit, minmax(min(339px), 1fr));
+    grid-auto-rows: auto;
+    column-gap: 30px;
+    row-gap: 36px;
+  }
+
+  .movies-list__show-more-btn {
+    margin: 79px 0 79px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .movies-list {
+    max-width: 540px;
+    padding: 0 10px;
+    min-height: 710px;
+  }
+
+  .movies-list__container {
+    row-gap: 20px;
+    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px), 1fr));
+  }
+}

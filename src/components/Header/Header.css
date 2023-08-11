@@ -29,7 +29,13 @@
   min-width: 38px;
   min-height: 38px;
   margin: 18px 0;
+  transition: opacity .3s linear 0s;
 }
+
+.header__logo:hover {
+  opacity: .7;
+}
+
 
 .header__authorization-container {
   display: grid;
@@ -134,4 +140,33 @@
 
 .header__account-logo_color_blue {
   background-color: #0d4a64;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    max-width: 768px;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header__container {
+    max-width: 540px;
+    padding: 0 14px;
+  }
+
+  .header__authorization-container {
+    column-gap: 14px;
+    max-width: 132px;
+  }
+
+  .header__registration {
+    font-size: 10px;
+  }
+
+  .header__login-button {
+    font-size: 10px;
+    padding: 5px 0;
+    max-width: 54px;
+  }
 }
