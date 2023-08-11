@@ -42,14 +42,16 @@
   color: #fff;
   border: 1px solid rgba(255, 255, 255, .6);
   border-radius: 3px;
+  max-width: 129px;
   min-height: 36px;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   transition: opacity .3s linear 0s;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .promo__learn-more:hover {

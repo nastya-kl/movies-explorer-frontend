@@ -11,6 +11,7 @@
 }
 
 .header__container {
+  position: relative;
   margin: 0 auto;
   max-width: 1280px;
   padding: 0 70px;
@@ -34,112 +35,6 @@
 
 .header__logo:hover {
   opacity: .7;
-}
-
-
-.header__authorization-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 30px;
-  align-items: center;
-  margin: 0;
-}
-
-.header__registration {
-  color: #fff;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 0;
-  margin: 0;
-  transition: opacity .3s linear 0s;
-  text-decoration: none;
-}
-
-.header__registration:hover {
-  opacity: .8;
-  cursor: pointer;
-}
-
-.header__login-button {
-  background-color: #3DDC84;
-  color: #000;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  border: none;
-  width: 100%;
-  padding: 8px 0;
-  border-radius: 3px;
-  transition: opacity .3s linear 0s;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none;
-  text-align: center;
-}
-
-.header__login-button:hover {
-  opacity: .8;
-  cursor: pointer;
-}
-
-.header__movies-container {
-  display: flex;
-  font-size: 13px;
-  line-height: 18px;
-  max-width: 212px;
-  margin-left: 61px;
-}
-
-.header__movies {
-  font-weight: 400;
-  margin: 0;
-  color: #fff;
-  text-decoration: none;
-  transition: opacity .3s linear 0s;
-}
-
-.header__movies:first-child {
-  margin-right: 16px;
-}
-
-.header__movies_status_active {
-  font-weight: 500;
-}
-
-.header__account-container {
-  font-size: 13px;
-  line-height: 18px;
-  max-width: 100px;
-}
-
-.header__account{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 16px;
-  margin: 0;
-  color: #fff;
-  text-decoration: none;
-  transition: opacity .3s linear 0s;
-}
-
-.header__account-logo {
-  background-color: #313131;
-  background-image: url('../../images/account-logo.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 11.5px 14px;
-  min-width: 26px;
-  min-height: 30px;
-  border-radius: 4px;
-  margin-left: 18px;
-}
-
-.header__account-logo_color_blue {
-  background-color: #0d4a64;
 }
 
 @media screen and (max-width: 768px) {
