@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import './PageNotFound.css'
+import "./PageNotFound.css";
 
-function PageNotFound({setIsPageNotFoundOpen}) {
+function PageNotFound({ setIsPageNotFoundOpen }) {
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -10,17 +10,19 @@ function PageNotFound({setIsPageNotFoundOpen}) {
   }, [setIsPageNotFoundOpen]);
 
   function goToPreviousPage() {
-    navigate('/', {replace: true});
+    navigate("/", { replace: true });
     setIsPageNotFoundOpen(false);
   }
 
   return (
-    <section className="not-found-page">
-      <h1 className="not-found-page__heading">404</h1>
-      <p className="not-found-page__text">Страница не найдена</p>
-      <button className="not-found-page__button" onClick={goToPreviousPage}>Назад</button>
-    </section>
-  )
+    <main className='not-found-page'>
+      <h1 className='not-found-page__heading'>404</h1>
+      <p className='not-found-page__text'>Страница не найдена</p>
+      <button className='not-found-page__button' onClick={goToPreviousPage}>
+        Назад
+      </button>
+    </main>
+  );
 }
 
 export default PageNotFound;

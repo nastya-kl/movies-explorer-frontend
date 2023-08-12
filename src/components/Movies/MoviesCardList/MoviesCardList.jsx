@@ -8,7 +8,7 @@ function MoviesCardList() {
   const location = useLocation();
 
   return (
-    <section className='movies-list'>
+    <section className='movies-list' aria-label='Секция с фильмами'>
       {location.pathname === "/movies" ? (
         <>
           <ul className='movies-list__container'>

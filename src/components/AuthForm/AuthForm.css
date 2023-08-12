@@ -31,7 +31,6 @@
   line-height: 29px;
   min-height: 29px;
   word-wrap: break-word;
-  text-align: center;
 }
 
 .auth__form {
@@ -66,6 +65,20 @@
   opacity: .8;
 }
 
+.button__disabled {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 45px;
+  cursor: not-allowed;
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+}
+
 .auth__label {
   color: #8B8B8B;
   font-weight: 400;
@@ -79,13 +92,17 @@
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  margin: 0 0 20px 0;
+  margin: 0 0 8px 0;
   padding: 0 0 0 15px;
   border: none;
   background-color: #2F2F2F;
   border-radius: 8px;
   color: #fff;
   transition: box-shadow .3s linear 0s;
+}
+
+.auth__input_color_red {
+  color: #EE3465;
 }
 
 .auth__input:last-child {
@@ -113,6 +130,15 @@
   text-decoration: none;
   margin: 0 0 0 6px;
   transition: opacity .3s linear 0s;
+}
+
+.input__error {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+  width: 100%;
+  min-height: 12px;
 }
 
 @media screen and (max-width: 768px) {

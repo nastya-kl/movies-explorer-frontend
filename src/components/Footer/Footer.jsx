@@ -10,8 +10,7 @@ function Footer() {
     location.pathname === "/signup";
 
   return (
-    !pathName &&
-    (
+    !pathName && (
       <footer className='footer'>
         <div className='footer__container'>
           <h2 className='footer__heading'>

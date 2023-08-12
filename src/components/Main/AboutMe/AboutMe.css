@@ -61,11 +61,6 @@
   transition: opacity .3s linear 0s;
 }
 
-.student__link:hover {
-  opacity: .8;
-  cursor: pointer;
-}
-
 .student__photo {
   object-fit: contain;
   max-width: 270px;

@@ -1,10 +1,10 @@
 import React from "react";
-import './Promo.css'
+import "./Promo.css";
 import { Link } from "react-scroll";
 
 function Promo() {
   return (
-    <section className='promo'>
+    <section className='promo' aria-label='Секция с промо'>
       <div className='promo__container'>
         <div className='promo__heading-container'>
           <h1 className='promo__heading'>

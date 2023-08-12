@@ -7,7 +7,7 @@
 .portfolio__container {
   margin: 0 auto;
   max-width: 1280px;
-  padding: 0 70px 125px;
+  padding: 0 70px 105px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -25,18 +25,17 @@
 
 .portfolio__link {
   margin: 20px 0;
-}
-
-.portfolio__link:first-child {
-  margin: 50px 0 0;
   padding-bottom: 20px;
   border-bottom: 1px solid #424242;
 }
 
+.portfolio__link:nth-of-type(1) {
+  margin-top: 50px;
+}
+
 .portfolio__link:nth-of-type(3) {
-  margin: 0;
-  padding-top: 20px;
-  border-top: 1px solid #424242;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .portfolio__text {
@@ -60,29 +59,41 @@
   min-width: 29px;
   min-height: 17px;
   display: inline-block;
-}
-
-.portfolio__text:hover {
-  opacity: .7;
-  cursor: pointer;
+  margin: 5px 1px 0 0px;
 }
 
 @media screen and (max-width: 768px) {
   .portfolio__container {
     max-width: 768px;
-    padding: 0 50px 169px;
+    padding: 0 50px 71px;
   }
 
   .portfolio__text {
     font-size: 28px;
     line-height: 50px;
   }
+
+  .portfolio__link:first-child {
+    padding-bottom: 19px;
+    border-bottom: 1px solid #E6E6E6;
+  }
+  
+  .portfolio__link:nth-of-type(2) {
+    margin: 0;
+    padding: 0 0 19px 0;
+    border-bottom: 1px solid #E6E6E6;
+  }
+  .portfolio__arrow {
+    min-width: 29px;
+    min-height: 17px;
+    margin: 5px 0px 0 0;
+  }
 }
 
 @media screen and (max-width: 540px) {
   .portfolio__container {
     max-width: 540px;
-    padding: 0 14px 67px;
+    padding: 0 14px 50px;
   }
 
   .portfolio__heading {
@@ -99,17 +110,18 @@
   .portfolio__link:first-child {
     margin-top: 41px;
     padding-bottom: 18px;
-    border-bottom: 1px solid #E6E6E6;
   }
 
-  .portfolio__link:nth-of-type(3) {
-    border-top: 1px solid #E6E6E6;
+  .portfolio__link:nth-of-type(2) {
+    margin: 0;
+    padding: 0 0 19px 0;
+    border-bottom: 1px solid #E6E6E6;
   }
 
   .portfolio__arrow {
     background-size: contain;
     min-height: 11px;
     min-width: 11px;
-    margin-right: 4px;
+    margin: 0px 4px 3px 0;
   }
 }

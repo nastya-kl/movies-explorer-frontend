@@ -56,12 +56,14 @@
 .project__duration {
   max-width: 1140px;
   margin: 72px 0 35px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 2fr 1fr;
   row-gap: 14px;
   justify-items: center;
   align-items: stretch;
+  list-style: none;
 }
 
 .project__week {

@@ -4,8 +4,8 @@ import "./Portfolio.css";
 
 function Portfolio() {
   return (
-    <section className='portfolio'>
-      <div className='portfolio__container'>
+    <section className='portfolio' aria-label='Секция с портфолио'>
+      <nav className='portfolio__container'>
         <ul className='portfolio__heading'>
           Портфолио
           <li className='portfolio__link'>
@@ -13,6 +13,7 @@ function Portfolio() {
               className='portfolio__text'
               to='https://github.com/nastya-kl/how-to-learn'
               target='blank'
+              rel='noopener noreferrer'
             >
               Статичный сайт <div className='portfolio__arrow'></div>
             </Link>
@@ -22,6 +23,7 @@ function Portfolio() {
               className='portfolio__text'
               to='https://nastya-kl.github.io/russian-travel/'
               target='blank'
+              rel='noopener noreferrer'
             >
               Адаптивный сайт <div className='portfolio__arrow'></div>
             </Link>
@@ -31,12 +33,13 @@ function Portfolio() {
               className='portfolio__text'
               to='https://mesto.nastya-kll.nomoreparties.sbs'
               target='blank'
+              rel='noopener noreferrer'
             >
               Одностраничное приложение <div className='portfolio__arrow'></div>
             </Link>
           </li>
         </ul>
-      </div>
+      </nav>
     </section>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import "./Navigation.css";
 import { useLocation, Link } from "react-router-dom";
 
-function Navigation() {
+function Navigation({isloggedIn}) {
   const location = useLocation();
   const body = document.querySelector("body");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
@@ -19,7 +19,7 @@ function Navigation() {
 
   return (
     <div className={`header__wrapper ${isBurgerMenuOpen ? "open" : ""}`}>
-      {location.pathname === "/" ? (
+      {!isloggedIn ? (
         <div className='header__authorization-container'>
           <Link to='/signup' className='header__registration'>
             Регистрация
@@ -40,13 +40,13 @@ function Navigation() {
           </button>
           <div className='header__menu'>
             <div className='header__movies-container'>
-                <Link
-                  to='/'
-                  className='header__movies header__movies_go-to_main'
-                  onClick={handleMenuLinkClick}
-                >
-                  Главная
-                </Link>
+              <Link
+                to='/'
+                className='header__movies header__movies_go-to_main'
+                onClick={handleMenuLinkClick}
+              >
+                Главная
+              </Link>
               <Link
                 to='/movies'
                 className={`header__movies ${
@@ -77,7 +77,7 @@ function Navigation() {
                 onClick={handleMenuLinkClick}
               >
                 Аккаунт
-                <div className='header__account-logo'></div>
+                <div className={`header__account-logo ${location.pathname === '/' ? 'header__account-logo_color_blue' : ''}`}></div>
               </Link>
             </div>
           </div>

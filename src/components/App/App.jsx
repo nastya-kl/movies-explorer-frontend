@@ -17,50 +17,52 @@ function App() {
 
   return (
     <div className='page'>
-      <div className="wrapper">
-      {!isPageNotFoundOpen && <Header isloggedIn={isLoggedIn} />}
+      <div className='wrapper'>
+        {!isPageNotFoundOpen && <Header isloggedIn={isLoggedIn} />}
 
-<Routes>
-  <Route path='/' element={<Main />} />
+        <Routes>
+          <Route path='/' element={<Main />} />
 
-  {/* <Route path='/movies' element={<ProtectedRoute
-    element={Movies}
-    isLoggedIn={isLoggedIn}
-    />}
-  /> */}
+          <Route
+            path='/movies'
+            element={
+              <ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} />
+            }
+          />
 
-  <Route path='/movies' element={<Movies isLoggedIn={isLoggedIn}/>}
-  />
+          <Route
+            path='/saved-movies'
+            element={
+              <ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                setIsLoggedIn={setIsLoggedIn}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          />
 
-  <Route path='/saved-movies' element={<ProtectedRoute
-      element={SavedMovies}
-      isLoggedIn={isLoggedIn}
-    />}
-  />
-  <Route path='/profile' element={<ProtectedRoute
-    element=
-      {Profile}
-        setIsLoggedIn={setIsLoggedIn}
-        isLoggedIn={isLoggedIn}
-    />}
-  />
+          <Route
+            path='/signin'
+            element={
+              <Login setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+            }
+          />
+          <Route path='/signup' element={<Register />} />
+          <Route
+            path='*'
+            element={
+              <PageNotFound setIsPageNotFoundOpen={setIsPageNotFoundOpen} />
+            }
+          />
+        </Routes>
 
-  <Route
-    path='/signin'
-    element={
-      <Login
-        setIsLoggedIn={setIsLoggedIn}
-        isLoggedIn={isLoggedIn} />
-    }
-  />
-  <Route path='/signup' element={<Register />} />
-  <Route
-    path='*'
-    element={<PageNotFound setIsPageNotFoundOpen={setIsPageNotFoundOpen}/> }
-  />
-</Routes>
-
-{!isPageNotFoundOpen && <Footer />}
+        {!isPageNotFoundOpen && <Footer />}
       </div>
     </div>
   );

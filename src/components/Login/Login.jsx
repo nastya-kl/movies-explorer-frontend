@@ -1,26 +1,31 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import useForm from "../../hooks/useForm";
+import ValidateForm from "../../hooks/ValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
-import "./Login.css";
 
-function Login({setIsLoggedIn, isLoggedIn}) {
-  const profileEmail = "pochta@yandex.ru";
-  const { values, handleChange, setValues } = useForm({});
+function Login({ setIsLoggedIn, isLoggedIn }) {
+  const {
+    values,
+    handleChange,
+    setValues,
+    errors,
+    isFormValid,
+    inputValidation,
+  } = ValidateForm({});
   const { email, password } = values;
   const navigate = useNavigate();
 
   React.useEffect(() => {
     setValues({
-      email: profileEmail,
+      email: "pochta@yandex.ru",
       password: "12345678912345",
     });
   }, [setValues]);
 
-  function handleLogin() {
+  function handleSubmit(e) {
+    e.preventDefault();
     setIsLoggedIn(true);
-    console.log(isLoggedIn);
-    navigate('/movies', { replace: true });
+    navigate("/movies", { replace: true });
   }
 
   return (
@@ -29,33 +34,50 @@ function Login({setIsLoggedIn, isLoggedIn}) {
       isLoggedText='Ещё не зарегистрированы?'
       authPath='/signup'
       authWay='Регистрация'
-      setIsLoggedIn={setIsLoggedIn}
     >
-      <div className='auth__inputs-container'>
-        <label htmlFor='email' className='auth__label'>
-          E-mail
-        </label>
-        <input
-          type='email'
-          id='email'
-          className='auth__input'
-          name='email'
-          value={email || ""}
-          onChange={handleChange}
-        />
-        <label htmlFor='password' className='auth__label'>
-          Пароль
-        </label>
-        <input
-          type='password'
-          id='password'
-          className='auth__input'
-          name='password'
-          value={password || ""}
-          onChange={handleChange}
-        />
-      </div>
-      <button className="auth__button" type="submit" onClick={handleLogin}>Войти</button>
+      <form className='auth__form' onSubmit={handleSubmit} noValidate>
+        <div className='auth__inputs-container'>
+          <label htmlFor='email' className='auth__label'>
+            E-mail
+          </label>
+          <input
+            type='email'
+            id='email'
+            className={`auth__input ${
+              !inputValidation.email ? "auth__input_color_red" : ""
+            }`}
+            name='email'
+            value={email || ""}
+            onChange={handleChange}
+            errors={errors}
+            required
+          />
+          <span className='input__error'>{errors.email}</span>
+          <label htmlFor='password' className='auth__label'>
+            Пароль
+          </label>
+          <input
+            type='password'
+            id='password'
+            className={`auth__input ${
+              !inputValidation.password ? "auth__input_color_red" : ""
+            }`}
+            name='password'
+            value={password || ""}
+            onChange={handleChange}
+            errors={errors}
+            required
+          />
+          <span className='input__error'>{errors.password}</span>
+        </div>
+        <button
+          className={`${!isFormValid ? "button__disabled" : "auth__button"}`}
+          type='submit'
+          disabled={!isFormValid}
+        >
+          Войти
+        </button>
+      </form>
     </AuthForm>
   );
 }

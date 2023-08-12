@@ -33,10 +33,6 @@
   transition: opacity .3s linear 0s;
 }
 
-.header__logo:hover {
-  opacity: .7;
-}
-
 @media screen and (max-width: 768px) {
   .header__container {
     max-width: 768px;
