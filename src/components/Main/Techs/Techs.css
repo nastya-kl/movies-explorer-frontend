@@ -1,7 +1,5 @@
 .techs {
   background-color: #272727;
-  margin: 0 auto;
-  color: #fff;
 }
 
 .techs__container {
@@ -13,7 +11,7 @@
   flex-direction: column;
 }
 
-.project__heading_margin_less {
+.section__heading_margin_less {
   margin: 25px 0;
 }
 

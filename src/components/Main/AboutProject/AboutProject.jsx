@@ -3,9 +3,9 @@ import "./AboutProject.css";
 
 function AboutProject() {
   return (
-    <section className='project' aria-label='Секция с информацией о проекте'>
+    <section className='section project' aria-label='Секция с информацией о проекте'>
       <div className='project__container'>
-        <h2 className='project__heading'>О проекте</h2>
+        <h2 className='section__heading'>О проекте</h2>
         <ul className='project__description-container'>
           <li>
             <h3 className='project__description-heading'>

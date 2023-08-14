@@ -4,10 +4,10 @@ import "./Portfolio.css";
 
 function Portfolio() {
   return (
-    <section className='portfolio' aria-label='Секция с портфолио'>
+    <section className='portfolio section' aria-label='Секция с портфолио'>
       <nav className='portfolio__container'>
-        <ul className='portfolio__heading'>
-          Портфолио
+        <h3 className='portfolio__heading'>Портфолио</h3>
+        <ul>
           <li className='portfolio__link'>
             <Link
               className='portfolio__text'

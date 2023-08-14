@@ -7,13 +7,15 @@ function Navigation({isloggedIn}) {
   const body = document.querySelector("body");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
 
+  console.log(isBurgerMenuOpen);
+
   function handleBurgerBtnClick() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-    body.classList.toggle("_locked");
+    body.classList.toggle("body_status_locked");
   }
 
   function handleMenuLinkClick() {
-    body.classList.remove("_locked");
+    body.classList.remove("body_status_locked");
     setIsBurgerMenuOpen(false);
   }
 
@@ -31,7 +33,7 @@ function Navigation({isloggedIn}) {
       ) : (
         <>
           <button
-            className={`header__burger-btn ${isBurgerMenuOpen ? "_open" : ""}`}
+            className={`header__burger-btn ${location.pathname === '/' && !isBurgerMenuOpen ? 'header__burger-btn_color_blue' : ''} ${isBurgerMenuOpen ? "header__burger-btn_status_open" : ""}`}
             onClick={handleBurgerBtnClick}
           >
             <span></span>

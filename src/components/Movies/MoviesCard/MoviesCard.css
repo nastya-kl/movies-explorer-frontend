@@ -1,4 +1,4 @@
-.movie__card {
+.movie {
   display: flex;
   flex-direction: column;
   justify-self: center;
@@ -58,13 +58,13 @@
   opacity: .8;
 }
 
-.movie__save-button_status_inactive {
+.movie__button_status_inactive {
   background-color: #343434;
   border-radius: 20px;
   border: 1px solid #fff;
 }
 
-.movie__save-button_status_active {
+.movie__button_status_active {
   background-color: #2BE080;
   border-radius: 20px;
   border: 1px solid #fff;
@@ -78,7 +78,7 @@
 }
 
 @media screen and (max-width: 990px) {
-  .movie__card {
+  .movie {
     max-width: 339px;
     min-height: 257px;
   }
@@ -89,7 +89,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .movie__card {
+  .movie {
     max-width: 300px;
     min-height: 235px;
   }

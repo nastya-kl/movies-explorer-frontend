@@ -1,7 +1,5 @@
 .portfolio {
   background-color: #202020;
-  margin: 0 auto;
-  color: #fff;
 }
 
 .portfolio__container {
@@ -13,6 +11,12 @@
   flex-direction: column;
 }
 
+.portfolio__container ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .portfolio__heading {
   margin: 0;
   padding: 0;
@@ -20,7 +24,6 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  list-style: none;
 }
 
 .portfolio__link {

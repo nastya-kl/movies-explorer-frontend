@@ -5,9 +5,9 @@ import "./AboutMe.css";
 
 function AboutMe() {
   return (
-    <section className='student' aria-label='Секция с информацией о студенте'>
+    <section className='section student' aria-label='Секция с информацией о студенте'>
       <div className='student__container'>
-        <h2 className='project__heading'>Студент</h2>
+        <h2 className='section__heading'>Студент</h2>
         <div className='student__info-container'>
           <div className='student__text-info'>
             <h3 className='student__name'>Виталий</h3>

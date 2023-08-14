@@ -1,0 +1,15 @@
+.section {
+  margin: 0 auto;
+  color: #fff;
+}
+
+.section__heading {
+  max-width: 1140px;
+  letter-spacing: -1px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  margin: 35px 0 40px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #DADADA;
+}

@@ -129,7 +129,7 @@
   display: none;
 }
 
-._locked {
+.body_status_locked {
   overflow: hidden;
 }
 
@@ -148,6 +148,10 @@
     cursor: pointer;
     z-index: 3;
     transition: all 0.5s linear;
+  }
+
+  .header__burger-btn_color_blue {
+    background-color: #073042;
   }
 
   .header__burger-btn:hover {
@@ -176,24 +180,24 @@
     transform: translateY(9px);
   }
 
-  ._open {
+  .header__burger-btn_status_open {
     width: 18px;
     height: 18px;
     margin-right: 0;
   }
 
-  .header__burger-btn._open span:nth-child(1) {
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(1) {
     transform: translateY(-1px) translateX(-1px) rotate(45deg);
     width: 22px;
   }
 
-  .header__burger-btn._open span:nth-child(2) {
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(2) {
     transform: translateX(-1px);
     opacity: 0;
     width: 22px;
   }
 
-  .header__burger-btn._open span:nth-child(3) {
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(3) {
     transform: translateY(-1px) translateX(-1px) rotate(-45deg);
     width: 22px;
   }
@@ -339,7 +343,7 @@
     margin-bottom: 103px;
   }
   
-  .header__burger-btn._open {
+  .header__burger-btn.header__burger-btn_status_open {
     margin-right: 7px;
     margin-bottom: 17px;
   }

@@ -4,11 +4,11 @@ import "./Techs.css";
 function Techs() {
   return (
     <section
-      className='techs'
+      className='techs section'
       aria-label='Секция с информацией об изученных технологиях'
     >
       <div className='techs__container'>
-        <h2 className='project__heading project__heading_margin_less'>
+        <h2 className='section__heading section__heading_margin_less'>
           Технологии
         </h2>
         <h3 className='techs__heading'>7 технологий</h3>

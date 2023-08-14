@@ -8,8 +8,8 @@ function MoviesCard(props) {
   const savedMoviesPath = location.pathname === "/saved-movies";
   const saveButtonClassName = `${
     !isLiked
-      ? "movie__save-button_status_inactive"
-      : "movie__save-button_status_active"
+      ? "movie__button_status_inactive"
+      : "movie__button_status_active"
   }`;
 
   function handleButtonClick() {
@@ -17,7 +17,7 @@ function MoviesCard(props) {
   }
 
   return (
-    <li className='movie__card'>
+    <li className='movie'>
       <img
         src={props.movie.image}
         className='movie__image'
