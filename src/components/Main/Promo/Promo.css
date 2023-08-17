@@ -1,0 +1,136 @@
+.promo {
+  background-color: #073042;
+  margin: 0 auto;
+}
+
+.promo__container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 75px 70px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.promo__heading-container {
+  max-width: 640px;
+}
+
+.promo__heading {
+  color: #fff;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  min-height: 174px;
+  max-width: 640px;
+  margin: 0 0 34px 0;
+}
+
+.promo__info {
+  color: #fff;
+  opacity: .5;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  min-height: 32px;
+  max-width: 310px;
+  margin: 0 0 146px 0;
+}
+
+.promo__learn-more {
+  background-color: #073042;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .6);
+  border-radius: 3px;
+  max-width: 129px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  transition: opacity .3s linear 0s;
+  padding: 0;
+}
+
+.promo__learn-more:hover {
+  opacity: .8;
+  cursor: pointer;
+}
+
+.promo__image {
+  background-image: url(../../../images/promo-earth.svg);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: top;
+  background-size:contain;
+  width: calc(100% - 60%);
+  min-height: 304px;
+  align-self: start;
+}
+
+@media screen and (max-width: 768px) {
+  .promo__container {
+    max-width: 768px;
+    padding: 140px 44px 0;
+    flex-direction: column-reverse;
+  }
+
+  .promo__heading-container {
+    max-width: 680px;
+  }
+
+  .promo__heading {
+    font-size: 40px;
+    line-height: 50px;
+    min-height: 100px;
+    max-width: 680px;
+    margin: 48px 0 22px;
+    text-align: center;
+  }
+
+  .promo__info {
+    margin: 0 auto 90px;
+    text-align: center;
+    max-width: 260px;
+  }
+
+  .promo__learn-more {
+    margin: 0 auto 76px;
+  }
+
+  .promo__image {
+    margin: 0 auto;
+    background-position: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .promo__container {
+    max-width: 540px;
+    padding: 70px 0 0;
+  }
+
+  .promo__heading {
+    margin: 44px auto 24px;
+    letter-spacing: -1.1px;
+    font-size: 30px;
+    line-height: 38px;
+    min-height: 11px;
+    max-width: 300px;
+  }
+
+  .promo__info {
+    margin-bottom: 78px;
+  }
+
+  .promo__learn-more {
+    margin-bottom: 30px;
+  }
+
+  .promo__image {
+    min-height: 206px;
+  }
+}

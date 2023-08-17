@@ -1,0 +1,100 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  max-width: 270px;
+  min-height: 218px;
+  background-color: #222222;
+  border-radius: 10px;
+  list-style: none;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 5%);;
+}
+
+.movie__image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 151px;
+}
+
+.movie__lower-part {
+  margin: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 10px;
+  position: relative;
+}
+
+.movie__title {
+  color: #fff;
+  max-width: 206px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  margin: 0;
+}
+
+.movie__duration {
+  color: #8B8B8B;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  margin: 0;
+}
+
+.movie__button {
+  position: absolute;
+  border: none;
+  right: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.movie__button:hover {
+  opacity: .8;
+}
+
+.movie__button_status_inactive {
+  background-color: #343434;
+  border-radius: 20px;
+  border: 1px solid #fff;
+}
+
+.movie__button_status_active {
+  background-color: #2BE080;
+  border-radius: 20px;
+  border: 1px solid #fff;
+}
+
+.movie__delete-button {
+  background-color: #222222;
+  background-image: url(../../../images/movie-delete-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 990px) {
+  .movie {
+    max-width: 339px;
+    min-height: 257px;
+  }
+
+  .movie__image {
+    min-height: 190px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .movie {
+    max-width: 300px;
+    min-height: 235px;
+  }
+
+  .movie__image {
+    min-height: 168px;
+  }
+}

@@ -1,0 +1,350 @@
+.header__wrapper {
+  width: calc(483px + (676 - 412) * ((100% - 768px) / (1280 - 768)));
+  max-width: 676px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header__menu {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.header__authorization-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 30px;
+  align-items: center;
+  margin: 0;
+}
+
+.header__registration {
+  color: #fff;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+  transition: opacity 0.3s linear 0s;
+  text-decoration: none;
+}
+
+.header__registration:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.header__login-button {
+  background-color: #3ddc84;
+  color: #000;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: none;
+  width: 100%;
+  padding: 8px 0;
+  border-radius: 3px;
+  transition: opacity 0.3s linear 0s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  text-align: center;
+}
+
+.header__login-button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.header__movies-container {
+  display: flex;
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 212px;
+  margin: 0;
+}
+
+.header__movies {
+  font-weight: 400;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s linear 0s;
+}
+
+.header__movies_go-to_main {
+  display: none;
+  visibility: hidden;
+}
+
+.header__movies:nth-child(3) {
+  margin-left: 16px;
+}
+
+.header__movies_status_active {
+  font-weight: 500;
+}
+
+.header__account-container {
+  font-size: 13px;
+  line-height: 18px;
+  max-width: 100px;
+}
+
+.header__account {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.3s linear 0s;
+}
+
+.header__account-logo {
+  background-color: #313131;
+  background-image: url("../../images/account-logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 11.5px 14px;
+  min-width: 26px;
+  min-height: 30px;
+  border-radius: 4px;
+  margin-left: 18px;
+}
+
+.header__account-logo_color_blue {
+  background-color: #0d4a64;
+}
+
+.header__burger-btn {
+  visibility: hidden;
+  display: none;
+}
+
+.body_status_locked {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+  .header__burger-btn {
+    visibility: visible;
+    display: block;
+    position: relative;
+    padding: 0px;
+    margin-right: 8px;
+    width: 28px;
+    height: 23px;
+    background-color: #202020;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 3;
+    transition: all 0.5s linear;
+  }
+
+  .header__burger-btn_color_blue {
+    background-color: #073042;
+  }
+
+  .header__burger-btn:hover {
+    opacity: 0.8;
+  }
+
+  .header__burger-btn span {
+    display: block;
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    background-color: #fff;
+    transition: all 0.5s linear;
+    will-change: transform;
+  }
+
+  .header__burger-btn span:nth-child(1) {
+    transform: translateY(-11px);
+  }
+
+  .header__burger-btn span:nth-child(2) {
+    top: 10px;
+  }
+
+  .header__burger-btn span:nth-child(3) {
+    transform: translateY(9px);
+  }
+
+  .header__burger-btn_status_open {
+    width: 18px;
+    height: 18px;
+    margin-right: 0;
+  }
+
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(1) {
+    transform: translateY(-1px) translateX(-1px) rotate(45deg);
+    width: 22px;
+  }
+
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(2) {
+    transform: translateX(-1px);
+    opacity: 0;
+    width: 22px;
+  }
+
+  .header__burger-btn.header__burger-btn_status_open span:nth-child(3) {
+    transform: translateY(-1px) translateX(-1px) rotate(-45deg);
+    width: 22px;
+  }
+
+  .header__menu {
+    background-color: #202020;
+    position: absolute;
+    top: 0;
+    right: -520px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 520px;
+    padding: 0 90px;
+    z-index: 2;
+    justify-content: space-between;
+    height: 100vh;
+    visibility: hidden;
+    transition: transform 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  }
+
+  .header__wrapper.open .header__menu {
+    transform: translateX(-520px);
+    visibility: visible;
+  }
+
+  .header__menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    background-color: #000;
+    opacity: 0;
+    width: 100vw;
+    height: 100%;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .header__wrapper.open .header__menu::before {
+    opacity: 0.3;
+  }
+
+  .header__movies-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    text-align: center;
+  }
+
+  .header__movies {
+    margin: 28px 0 0 0;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+    max-width: 340px;
+  }
+
+  .header__movies_go-to_main {
+    display: block;
+    visibility: visible;
+  }
+
+  .header__movies:first-child {
+    margin-right: 0;
+    margin-top: 159px;
+  }
+
+  .header__account-container {
+    max-width: 100%;
+    display: flex;
+    margin-bottom: 99px;
+  }
+
+  .header__account {
+    margin: 0 auto;
+  }
+
+  .header__account-logo {
+    margin-left: 17px;
+  }
+
+  ._underlined {
+    text-decoration: underline 2px;
+    text-underline-offset: 9px;
+  }
+  .header__movies:nth-child(3) {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header__authorization-container {
+    column-gap: 14px;
+    max-width: 132px;
+  }
+
+  .header__registration {
+    font-size: 10px;
+  }
+  
+  .header__login-button {
+    font-size: 10px;
+    padding: 5px 0;
+    max-width: 54px;
+  }
+  
+  .header__burger-btn {
+    margin-right: 3px;
+  }
+  
+  .header__burger-btn span {
+    width: 22px;
+    height: 2.5px;
+  }
+  
+  .header__burger-btn span:nth-child(1) {
+    transform: translateY(-10px);
+  }
+  
+  .header__burger-btn span:nth-child(3) {
+    transform: translateY(8px);
+  }
+  
+  .header__menu {
+    width: 100%;
+    padding: 0 50px;
+  }
+  
+  .header__movies {
+    margin-top: 24px;
+  }
+  
+  .header__movies:first-child {
+    margin-top: 145px;
+  }
+  
+  ._underlined {
+    text-underline-offset: 11px;
+  }
+  
+  .header__account-container {
+    margin-bottom: 103px;
+  }
+  
+  .header__burger-btn.header__burger-btn_status_open {
+    margin-right: 7px;
+    margin-bottom: 17px;
+  }
+}
