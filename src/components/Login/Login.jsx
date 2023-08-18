@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import ValidateForm from "../../hooks/ValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login({ setIsLoggedIn, isLoggedIn }) {
+function Login({ setIsLoggedIn, isLoggedIn, onLogin }) {
   const {
     values,
     handleChange,
@@ -13,7 +12,6 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
     inputValidation,
   } = ValidateForm({});
   const { email, password } = values;
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     setValues({
@@ -25,7 +23,7 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoggedIn(true);
-    navigate("/movies", { replace: true });
+    onLogin(values);
   }
 
   return (

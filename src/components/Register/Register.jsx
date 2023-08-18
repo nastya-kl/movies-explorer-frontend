@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import ValidateForm from "../../hooks/ValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register() {
+function Register({onRegister}) {
   const {
     values,
     handleChange,
@@ -13,7 +12,6 @@ function Register() {
     inputValidation,
   } = ValidateForm({});
   const { name, email, password } = values;
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     setValues({
@@ -25,7 +23,7 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/signin", { replace: true });
+    onRegister(values);
   }
 
   return (

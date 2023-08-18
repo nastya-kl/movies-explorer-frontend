@@ -1,12 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import ValidateForm from "../../hooks/ValidateForm";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn, isLoggedIn }) {
-  const profileName = "Виталий";
-  const profileEmail = "pochta@yandex.ru";
-  const navigate = useNavigate();
+function Profile({ onLogout, onUpdateUserInfo }) {
+  const currentUser = React.useContext(CurrentUserContext);
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
   const { values, handleChange, errors, setValues, isFormValid } = ValidateForm(
@@ -15,8 +13,11 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
   const { name, email } = values;
 
   React.useEffect(() => {
-    setValues({ name: profileName, email: profileEmail });
-  }, [setValues]);
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email
+    });
+  }, [currentUser.email, currentUser.name, setValues]);
 
   function handleInputChanging() {
     if (isEdition) {
@@ -39,13 +40,11 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
     e.preventDefault();
     setIsEdition(false);
     handleInputChanging();
+    onUpdateUserInfo({
+      name: values.name,
+      email: values.email
+    })
   }
-
-  const handleSignout = () => {
-    navigate("/", { replace: true });
-    setIsLoggedIn(false);
-    console.log(isLoggedIn);
-  };
 
   return (
     <main className='profile'>
@@ -90,7 +89,7 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
                 </button>
                 <button
                   className='profile__logout-button'
-                  onClick={handleSignout}
+                  onClick={onLogout}
                 >
                   Выйти из аккаунта
                 </button>

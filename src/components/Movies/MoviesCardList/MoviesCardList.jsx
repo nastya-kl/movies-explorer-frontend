@@ -2,9 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { moviesList, savedMoviesList } from "../../../utils/constants";
+import { savedMoviesList } from "../../../utils/constants";
 
-function MoviesCardList() {
+function MoviesCardList({ movies, filteredMovies }) {
   const location = useLocation();
 
   return (
@@ -12,7 +12,7 @@ function MoviesCardList() {
       {location.pathname === "/movies" ? (
         <>
           <ul className='movies-list__container'>
-            {moviesList.map((movie, i) => (
+            {filteredMovies.map((movie, i) => (
               <MoviesCard key={i} movie={movie} />
             ))}
           </ul>

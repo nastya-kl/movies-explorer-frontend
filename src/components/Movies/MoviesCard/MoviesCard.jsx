@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./MoviesCard.css";
 
 function MoviesCard(props) {
@@ -16,16 +16,24 @@ function MoviesCard(props) {
     setIsLiked(!isLiked);
   }
 
+  function setMovieDuration(mins) {
+    let hours = Math.trunc(mins/60);
+    let minutes = mins % 60;
+    return hours + 'ч ' + minutes + 'м';
+  }
+
   return (
     <li className='movie'>
-      <img
-        src={props.movie.image}
-        className='movie__image'
-        alt={`Обложка фильма ${props.movie.title}`}
-      />
+      <Link to={props.movie.trailerLink} target="blank">
+        <img
+          src={`https://api.nomoreparties.co${props.movie.image.url}`}
+          className='movie__image'
+          alt={`Обложка фильма ${props.movie.nameRU}`}
+        />
+      </Link>
       <div className='movie__lower-part'>
-        <h2 className='movie__title'>{props.movie.title}</h2>
-        <p className='movie__duration'>{props.movie.duration}</p>
+        <h2 className='movie__title'>{props.movie.nameRU}</h2>
+        <p className='movie__duration'>{setMovieDuration(props.movie.duration)}</p>
         <button
           className={`movie__button ${
             !savedMoviesPath ? saveButtonClassName : "movie__delete-button"
