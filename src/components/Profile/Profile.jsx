@@ -7,17 +7,37 @@ function Profile({ onLogout, onUpdateUserInfo }) {
   const currentUser = React.useContext(CurrentUserContext);
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
-  const { values, handleChange, errors, setValues, isFormValid } = ValidateForm(
-    {}
-  );
+  const [errorText, setErrorText] = React.useState('');
+  const {
+    values,
+    handleChange,
+    errors,
+    setValues,
+    isFormValid,
+    setIsFormValid,
+  } = ValidateForm({});
   const { name, email } = values;
+
+  React.useEffect(() => {
+    if (!isFormValid) {
+      setErrorText('При обновлении профиля произошла ошибка');
+    } else {
+      setErrorText('')
+    }
+  }, [setErrorText, isFormValid])
 
   React.useEffect(() => {
     setValues({
       name: currentUser.name,
-      email: currentUser.email
+      email: currentUser.email,
     });
   }, [currentUser.email, currentUser.name, setValues]);
+
+  React.useEffect(() => {
+    if (currentUser.name === name && currentUser.email === email) {
+      setIsFormValid(false);
+    }
+  }, [name, email, currentUser.name, currentUser.email, setIsFormValid]);
 
   function handleInputChanging() {
     if (isEdition) {
@@ -42,8 +62,13 @@ function Profile({ onLogout, onUpdateUserInfo }) {
     handleInputChanging();
     onUpdateUserInfo({
       name: values.name,
-      email: values.email
-    })
+      email: values.email,
+    });
+  }
+
+  function handleCancelClick() {
+    setIsEdition(false);
+    handleInputChanging();
   }
 
   return (
@@ -87,24 +112,25 @@ function Profile({ onLogout, onUpdateUserInfo }) {
                 >
                   Редактировать
                 </button>
-                <button
-                  className='profile__logout-button'
-                  onClick={onLogout}
-                >
+                <button className='profile__logout-button' onClick={onLogout}>
                   Выйти из аккаунта
                 </button>
               </>
             )}
             {isEdition && (
-              <button
-                className={`${
-                  !isFormValid ? "button__disabled" : "profile__save-button"
-                }`}
-                type='submit'
-                disabled={!isFormValid}
-              >
-                Сохранить
-              </button>
+              <>
+                <p className='profile__error-text'>{errorText}</p>
+                <button
+                  className={`${
+                    !isFormValid ? "button__disabled" : "profile__save-button"
+                  }`}
+                  type='submit'
+                  disabled={!isFormValid}
+                >
+                  Сохранить
+                </button>
+                <button className="profile__cancel-button" onClick={handleCancelClick}>Отмена</button>
+              </>
             )}
           </div>
         </form>
