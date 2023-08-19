@@ -7,6 +7,15 @@
   padding: 0 70px;
 }
 
+.movies-list__empty-text {
+  margin: 55px auto -95px;
+  color: rgb(99, 99, 99) ;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 35px;
+  cursor: default;
+}
+
 .movies-list__container {
   width: 100%;
   padding: 0;

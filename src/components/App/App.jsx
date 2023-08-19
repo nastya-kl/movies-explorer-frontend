@@ -19,19 +19,10 @@ function App() {
   const [isPageNotFoundOpen, setIsPageNotFoundOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
   // const [savedMovies, setSavedMovies] = React.useState([]);
   
   const navigate = useNavigate();
-
-  function getAllMovies() {
-    if (isLoggedIn) {
-      Promise.all([moviesApi.getMovies()])
-        .then(([movies]) => setMovies(movies))
-        .catch((err) => {
-          console.log(`Ошибка: ${err}`);
-        });
-    }
-  }
   
   function handleTokenCheck() {
     const jwt = localStorage.getItem("jwt");
@@ -54,7 +45,6 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-    getAllMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
@@ -94,6 +84,33 @@ function App() {
       })
   }
 
+  function handleFilterhMovies(moviesData, inputValue) {
+    const data = moviesData.filter(movie => {
+      return movie.nameRU.toLowerCase().includes(inputValue.toLowerCase())
+    })
+  
+    if (data.length !== 0) {
+      setFilteredMovies(data);
+    } else {
+      alert('Нет фильмов')
+    }
+  }
+
+  function handleSearchMovies(inputValue) {
+    if (movies.length === 0) {
+      moviesApi.getMovies()
+        .then((res) => {
+          setMovies(res)
+          handleFilterhMovies(res, inputValue)
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        })
+    } else {
+      handleFilterhMovies(movies, inputValue)
+    }
+  }
+
   // function handleSaveMovie(movie) {
   //   mainApi.saveMovie(movie._id)
   //     .then((newMovie) => {
@@ -119,8 +136,9 @@ function App() {
                 <ProtectedRoute
                   element={Movies}
                   isLoggedIn={isLoggedIn}
-                  movies={movies}
-                  setMovies={setMovies}
+                  movies={filteredMovies}
+                  setMovies={setFilteredMovies}
+                  onSearchMovies = {handleSearchMovies}
                 />
               }
             />

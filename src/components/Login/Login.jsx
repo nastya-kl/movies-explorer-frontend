@@ -1,5 +1,5 @@
 import React from "react";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
 function Login({ setIsLoggedIn, isLoggedIn, onLogin }) {
@@ -10,7 +10,7 @@ function Login({ setIsLoggedIn, isLoggedIn, onLogin }) {
     errors,
     isFormValid,
     inputValidation,
-  } = ValidateForm({});
+  } = useValidateForm({});
   const { email, password } = values;
 
   React.useEffect(() => {

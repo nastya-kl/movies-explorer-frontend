@@ -1,6 +1,6 @@
 import React from "react";
 
-function ValidateForm() {
+function useValidateForm() {
   const [values, setValues] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [isFormValid, setIsFormValid] = React.useState(true);
@@ -32,4 +32,4 @@ function ValidateForm() {
   };
 }
 
-export default ValidateForm;
+export default useValidateForm;

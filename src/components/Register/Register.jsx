@@ -1,5 +1,5 @@
 import React from "react";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
 function Register({onRegister}) {
@@ -10,7 +10,7 @@ function Register({onRegister}) {
     errors,
     isFormValid,
     inputValidation,
-  } = ValidateForm({});
+  } = useValidateForm({});
   const { name, email, password } = values;
 
   React.useEffect(() => {

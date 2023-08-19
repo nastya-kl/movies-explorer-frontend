@@ -1,5 +1,5 @@
 import React from "react";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
@@ -15,7 +15,7 @@ function Profile({ onLogout, onUpdateUserInfo }) {
     setValues,
     isFormValid,
     setIsFormValid,
-  } = ValidateForm({});
+  } = useValidateForm({});
   const { name, email } = values;
 
   React.useEffect(() => {

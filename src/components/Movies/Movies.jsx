@@ -3,17 +3,16 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-function Main({ movies, setMovies }) {
-  const [value, setValue] = React.useState("");
+function Main({ movies, setMovies, onSearchMovies }) {
 
-  const filteredMovies = movies.filter(movie => {
-    return movie.nameRU.toLowerCase().includes(value.toLowerCase())
-  })
+  // const filteredMovies = movies.filter(movie => {
+  //   return movie.nameRU.toLowerCase().includes(value.toLowerCase())
+  // })
 
   return (
     <main className='movies'>
-      <SearchForm movies={movies} setMovies={setMovies} value={value} setValue={setValue}/>
-      <MoviesCardList movies={movies} filteredMovies={filteredMovies}/>
+      <SearchForm onSearchMovies={onSearchMovies} setMovies={setMovies}/>
+      <MoviesCardList movies={movies}/>
     </main>
   );
 }

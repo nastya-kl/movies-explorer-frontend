@@ -2,11 +2,16 @@ import React from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ movies, setMovies, value, setValue }) {
+function SearchForm({ onSearchMovies, setMovies }) {
+  const [value, setValue] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setValue(e.target.querySelector('.search-form__input').value);
+    if (value === '') {
+      setMovies([]);
+    } else {
+      onSearchMovies(value);
+    }
   };
 
 
@@ -15,8 +20,10 @@ function SearchForm({ movies, setMovies, value, setValue }) {
       <form className='search-form__container' onSubmit={handleSubmit}>
         <input
           placeholder='Фильм'
+          formAction="#"
           type='text'
           className='search-form__input'
+          onChange={(e) => setValue(e.target.value)}
         />
         <button className='search-form__button' type='submit'>
           Найти
