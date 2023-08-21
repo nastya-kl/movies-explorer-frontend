@@ -20,16 +20,26 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
-  // const [savedMovies, setSavedMovies] = React.useState([]);
-  
+  const [savedMovies, setSavedMovies] = React.useState([]);
+
   const navigate = useNavigate();
-  
+
+  function getSavedMovies() {
+    mainApi.getSavedMovies()
+    .then((res) => {
+      setSavedMovies(res.data);
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    });
+  }
+
   function handleTokenCheck() {
     const jwt = localStorage.getItem("jwt");
-    
+
     if (jwt) {
       mainApi
-      .checkToken(jwt)
+        .checkToken(jwt)
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
@@ -45,6 +55,10 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
+
+    if (isLoggedIn) {
+      getSavedMovies();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
@@ -75,51 +89,78 @@ function App() {
   }
 
   function handleUpdateUserInfo(userInfo) {
-    mainApi.changeUserInfo(userInfo)
+    mainApi
+      .changeUserInfo(userInfo)
       .then((user) => {
         setCurrentUser(user.data);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
-      })
+      });
   }
 
-  function handleFilterhMovies(moviesData, inputValue) {
-    const data = moviesData.filter(movie => {
-      return movie.nameRU.toLowerCase().includes(inputValue.toLowerCase())
-    })
-  
+  function handleFilterMovies(moviesData, inputValue) {
+    const data = moviesData.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(inputValue.toLowerCase());
+    });
+
     if (data.length !== 0) {
       setFilteredMovies(data);
     } else {
-      alert('Нет фильмов')
+      alert("Нет фильмов");
     }
   }
 
   function handleSearchMovies(inputValue) {
-    if (movies.length === 0) {
-      moviesApi.getMovies()
-        .then((res) => {
-          setMovies(res)
-          handleFilterhMovies(res, inputValue)
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        setMovies(res);
+        handleFilterMovies(res, inputValue);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  function handleSaveMovie(movie) {
+    const isLiked = savedMovies.some((savedMovie) => savedMovie.movieId === movie.movieId);
+
+    if (!isLiked) {
+      mainApi
+        .saveMovie(movie)
+        .then((savedMovie) =>
+          setSavedMovies((movies) => [...movies, savedMovie.data])
+        )
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    } else {
+      const id = savedMovies.find((savedMovie) => savedMovie.movieId === movie.movieId)._id;
+
+      mainApi
+        .deleteMovie(id)
+        .then(() => {
+          setSavedMovies(savedMovies.filter((savedMovie) => savedMovie._id !== id));
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
-        })
-    } else {
-      handleFilterhMovies(movies, inputValue)
+        });
     }
   }
 
-  // function handleSaveMovie(movie) {
-  //   mainApi.saveMovie(movie._id)
-  //     .then((newMovie) => {
-  //       setSavedMovies((state) => state.map((c) => c._id === movie._id ? newMovie.data : c));
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка: ${err}`);
-  //     })
-  // }
+  function handleDeleteMovie(id) {
+    mainApi
+      .deleteMovie(id)
+      .then(() =>
+        setSavedMovies((movies) =>
+          movies.filter((savedMovie) => savedMovie._id !== id)
+        )
+      )
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -137,8 +178,10 @@ function App() {
                   element={Movies}
                   isLoggedIn={isLoggedIn}
                   movies={filteredMovies}
+                  savedMovies={savedMovies}
                   setMovies={setFilteredMovies}
-                  onSearchMovies = {handleSearchMovies}
+                  onSearchMovies={handleSearchMovies}
+                  onSaveMovie={handleSaveMovie}
                 />
               }
             />
@@ -146,7 +189,12 @@ function App() {
             <Route
               path='/saved-movies'
               element={
-                <ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />
+                <ProtectedRoute
+                  element={SavedMovies}
+                  isLoggedIn={isLoggedIn}
+                  movies={savedMovies}
+                  onDeleteMovie={handleDeleteMovie}
+                />
               }
             />
             <Route
