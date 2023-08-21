@@ -2,13 +2,15 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from '../Preloader/Preloader';
 
-function MoviesCardList({ movies, onSaveMovie, onDeleteMovie, isSaved, savedMovies }) {
+function MoviesCardList({ movies, onSaveMovie, onDeleteMovie, isSaved, savedMovies, isLoading }) {
   const location = useLocation();
 
   return (
     <section className='movies-list' aria-label='Секция с фильмами'>
-      {movies.length === 0 && (
+      {isLoading && <Preloader />}
+      {movies.length === 0 && !isLoading && (
         <h2 className='movies-list__empty-text'>Ничего не найдено</h2>
       )}
       <ul className='movies-list__container'>
@@ -20,12 +22,12 @@ function MoviesCardList({ movies, onSaveMovie, onDeleteMovie, isSaved, savedMovi
             onDeleteMovie={onDeleteMovie}
             isSaved={isSaved}
             savedMovies={savedMovies}
-          />
-        ))}
+            />
+            ))}
       </ul>
       {movies.length !== 0 && location.pathname === "/movies" && (
         <button className='movies-list__show-more-btn'>Ещё</button>
-      )}
+        )}
     </section>
   );
 }

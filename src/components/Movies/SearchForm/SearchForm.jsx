@@ -1,11 +1,14 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ onSearchMovies, setMovies }) {
+function SearchForm({ onSearchMovies, onSearchSavedMovies, setMovies, setSavedMovies }) {
   const [value, setValue] = React.useState("");
+  const location = useLocation();
+  const allMoviesPath = location.pathname === '/movies'
 
-  const handleSubmit = (e) => {
+  const handleSubmitMoviesForm = (e) => {
     e.preventDefault();
     if (value === '') {
       setMovies([]);
@@ -14,10 +17,18 @@ function SearchForm({ onSearchMovies, setMovies }) {
     }
   };
 
+  const handleSubmitSavedMoviesForm = (e) => {
+    e.preventDefault();
+    if (value === '') {
+      setSavedMovies([]);
+    } else {
+      onSearchSavedMovies(value);
+    }
+  };
 
   return (
     <section className='search-form' aria-label='Секция с поиском фильмов'>
-      <form className='search-form__container' onSubmit={handleSubmit}>
+      <form className='search-form__container' onSubmit={allMoviesPath ? handleSubmitMoviesForm : handleSubmitSavedMoviesForm }>
         <input
           placeholder='Фильм'
           formAction="#"

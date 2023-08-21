@@ -17,6 +17,7 @@ function MoviesCard({
     !isLiked ? "movie__button_status_inactive" : "movie__button_status_active"
   }`;
 
+  
   function handleLikeButtonClick() {
     const movieInfo = {
       country: movie.country,
@@ -27,11 +28,12 @@ function MoviesCard({
       image: "https://api.nomoreparties.co" + movie.image.url,
       thumbnail:
         "https://api.nomoreparties.co" + movie.image.formats.thumbnail.url,
-      trailerLink: movie.trailerLink,
-      nameRU: movie.nameRU,
-      nameEN: movie.nameEN,
-      movieId: movie.id,
-    };
+        trailerLink: movie.trailerLink,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+        movieId: movie.id,
+      };
+
     onSaveMovie(movieInfo);
   }
 

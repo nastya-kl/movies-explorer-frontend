@@ -2,7 +2,7 @@ import React from "react";
 import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login({ setIsLoggedIn, isLoggedIn, onLogin }) {
+function Login({ setIsLoggedIn, onLogin, isLoading }) {
   const {
     values,
     handleChange,
@@ -73,7 +73,7 @@ function Login({ setIsLoggedIn, isLoggedIn, onLogin }) {
           type='submit'
           disabled={!isFormValid}
         >
-          Войти
+          {isLoading ? 'Выполняется вход...' : 'Войти'}
         </button>
       </form>
     </AuthForm>

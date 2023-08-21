@@ -2,7 +2,7 @@ import React from "react";
 import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register({onRegister}) {
+function Register({onRegister, isLoading}) {
   const {
     values,
     handleChange,
@@ -89,7 +89,7 @@ function Register({onRegister}) {
           type='submit'
           disabled={!isFormValid}
         >
-          Зарегистрироваться
+          {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
       </form>
     </AuthForm>

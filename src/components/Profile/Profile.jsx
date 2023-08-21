@@ -3,7 +3,7 @@ import useValidateForm from "../../hooks/useValidateForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
-function Profile({ onLogout, onUpdateUserInfo }) {
+function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
@@ -127,7 +127,7 @@ function Profile({ onLogout, onUpdateUserInfo }) {
                   type='submit'
                   disabled={!isFormValid}
                 >
-                  Сохранить
+                  {isLoading ? 'Сохранение...' : 'Сохранить'}
                 </button>
                 <button className="profile__cancel-button" onClick={handleCancelClick}>Отмена</button>
               </>
