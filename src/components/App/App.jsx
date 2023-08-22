@@ -68,7 +68,7 @@ function App() {
         }
       })
       .catch((err) => {
-        handleOpenInfoToolTip(true, false, 'При входе произошла ошибка')
+        handleOpenInfoToolTip(true, false, "При входе произошла ошибка");
         console.log(err);
       })
       .finally(() => {
@@ -83,10 +83,10 @@ function App() {
       .register({ name, email, password })
       .then(() => {
         handleLogin({ email, password });
-        handleOpenInfoToolTip(true, true, 'Вы успешно зарегистрировались');
+        handleOpenInfoToolTip(true, true, "Вы успешно зарегистрировались");
       })
       .catch((err) => {
-        handleOpenInfoToolTip(true, false, 'При регистрации произошла ошибка');
+        handleOpenInfoToolTip(true, false, "При регистрации произошла ошибка");
         console.log(err);
       })
       .finally(() => {
@@ -108,7 +108,7 @@ function App() {
       .changeUserInfo(userInfo)
       .then((user) => {
         setCurrentUser(user.data);
-        handleOpenInfoToolTip(true, true, 'Данные успешно обновлены');
+        handleOpenInfoToolTip(true, true, "Данные успешно обновлены");
       })
       .catch((err) => {
         console.log(err);
@@ -126,16 +126,24 @@ function App() {
 
     if (isShort) {
       data = data.filter((movie) => movie.duration < 40);
-    } 
+    }
 
     if (data.length !== 0 && location.pathname === "/movies") {
       setFilteredMovies(data);
+      localStorage.setItem(
+        "searchMoviesHistory",
+        JSON.stringify({ data, inputValue, isShort })
+      );
     } else if (data.length !== 0 && location.pathname === "/saved-movies") {
       setFilteredSavedMovies(data);
+      localStorage.setItem(
+        "searchSavedMoviesHistory",
+        JSON.stringify({ data, inputValue, isShort })
+      );
     } else {
       setFilteredMovies([]);
       setFilteredSavedMovies([]);
-      handleOpenInfoToolTip(true, false, 'Фильм не найден');
+      handleOpenInfoToolTip(true, false, "Фильм не найден");
     }
   }
 
@@ -151,7 +159,11 @@ function App() {
           handleFilterMovies(movies, inputValue, isShort);
         })
         .catch((err) => {
-          handleOpenInfoToolTip(true, false, 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+          handleOpenInfoToolTip(
+            true,
+            false,
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+          );
           console.log(err);
         })
         .finally(() => {
@@ -219,9 +231,9 @@ function App() {
           setSavedMovies((movies) =>
             movies.filter((savedMovie) => savedMovie._id !== id)
           ),
-          setFilteredSavedMovies((movies) =>
-            movies.filter((savedMovie) => savedMovie._id !== id)
-          )
+        setFilteredSavedMovies((movies) =>
+          movies.filter((savedMovie) => savedMovie._id !== id)
+        )
       )
       .catch((err) => {
         console.log(err);
@@ -246,8 +258,12 @@ function App() {
           console.log(err);
           setIsLoggedIn(false);
           setCurrentUser({});
-          navigate('/signin', { replace: true });
-          handleOpenInfoToolTip(true, false, 'При проверке токена произошла ошибка, авторизуйтесь ещё раз');
+          navigate("/signin", { replace: true });
+          handleOpenInfoToolTip(
+            true,
+            false,
+            "При проверке токена произошла ошибка, авторизуйтесь ещё раз"
+          );
         });
     }
   }
@@ -348,7 +364,6 @@ function App() {
           isCorrect={isInfoToolTipCorrect}
           onClose={handleCloseInfoToolTip}
         />
-
       </div>
     </CurrentUserContext.Provider>
   );

@@ -3,7 +3,7 @@ import { useLocation, Link } from "react-router-dom";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 
-function Header({isloggedIn}) {
+function Header({ isloggedIn }) {
   const location = useLocation();
   const pathName =
     location.pathname === "/signin" || location.pathname === "/signup";
@@ -17,7 +17,7 @@ function Header({isloggedIn}) {
       >
         <div className='header__container'>
           <Link className='header__logo' to='/'></Link>
-          <Navigation isloggedIn={isloggedIn}/>
+          <Navigation isloggedIn={isloggedIn} />
         </div>
       </header>
     )

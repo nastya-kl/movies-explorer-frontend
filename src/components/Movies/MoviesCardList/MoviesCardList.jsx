@@ -15,7 +15,8 @@ function MoviesCardList({
 }) {
   const location = useLocation();
 
-  const { amountOfMovies, handleShowMoreBtnClick, isShowMoreBtnVisible } = useRenderMovies({ movies });
+  const { amountOfMovies, handleShowMoreBtnClick, isShowMoreBtnVisible } =
+    useRenderMovies({ movies });
 
   return (
     <section className='movies-list' aria-label='Секция с фильмами'>
@@ -24,21 +25,27 @@ function MoviesCardList({
         <h2 className='movies-list__empty-text'>Ничего не найдено</h2>
       )}
       <ul className='movies-list__container'>
-        {movies.map((movie, i) => (
-          i < amountOfMovies && (
-            <MoviesCard
-              key={movie.id ?? movie._id}
-              movie={movie}
-              onSaveMovie={onSaveMovie}
-              onDeleteMovie={onDeleteMovie}
-              isSaved={isSaved}
-              savedMovies={savedMovies}
-            />
-          )
-        ))}
+        {movies.map(
+          (movie, i) =>
+            i < amountOfMovies && (
+              <MoviesCard
+                key={movie.id ?? movie._id}
+                movie={movie}
+                onSaveMovie={onSaveMovie}
+                onDeleteMovie={onDeleteMovie}
+                isSaved={isSaved}
+                savedMovies={savedMovies}
+              />
+            )
+        )}
       </ul>
       {isShowMoreBtnVisible && location.pathname === "/movies" && (
-        <button className='movies-list__show-more-btn' onClick={handleShowMoreBtnClick}>Ещё</button>
+        <button
+          className='movies-list__show-more-btn'
+          onClick={handleShowMoreBtnClick}
+        >
+          Ещё
+        </button>
       )}
     </section>
   );

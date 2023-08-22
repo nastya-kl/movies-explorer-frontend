@@ -73,7 +73,7 @@ function Login({ setIsLoggedIn, onLogin, isLoading }) {
           type='submit'
           disabled={!isFormValid}
         >
-          {isLoading ? 'Выполняется вход...' : 'Войти'}
+          {isLoading ? "Выполняется вход..." : "Войти"}
         </button>
       </form>
     </AuthForm>

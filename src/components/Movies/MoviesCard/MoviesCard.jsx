@@ -12,12 +12,12 @@ function MoviesCard({
   const location = useLocation();
   const savedMoviesPath = location.pathname === "/saved-movies";
   const isLiked =
-    !savedMoviesPath && savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+    !savedMoviesPath &&
+    savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
   const saveButtonClassName = `${
     !isLiked ? "movie__button_status_inactive" : "movie__button_status_active"
   }`;
 
-  
   function handleLikeButtonClick() {
     const movieInfo = {
       country: movie.country,
@@ -28,11 +28,11 @@ function MoviesCard({
       image: "https://api.nomoreparties.co" + movie.image.url,
       thumbnail:
         "https://api.nomoreparties.co" + movie.image.formats.thumbnail.url,
-        trailerLink: movie.trailerLink,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-        movieId: movie.id,
-      };
+      trailerLink: movie.trailerLink,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+      movieId: movie.id,
+    };
 
     onSaveMovie(movieInfo);
   }
@@ -67,7 +67,9 @@ function MoviesCard({
           className={`movie__button ${
             !savedMoviesPath ? saveButtonClassName : "movie__delete-button"
           }`}
-          onClick={savedMoviesPath ? handleDeleteButtonClick : handleLikeButtonClick}
+          onClick={
+            savedMoviesPath ? handleDeleteButtonClick : handleLikeButtonClick
+          }
         ></button>
       </div>
     </li>

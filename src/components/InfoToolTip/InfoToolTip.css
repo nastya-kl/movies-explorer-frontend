@@ -15,7 +15,7 @@
 }
 
 .tool-tip_visibility_true {
-  visibility: visible ;
+  visibility: visible;
   opacity: 1;
 }
 
@@ -63,11 +63,11 @@
   position: absolute;
   right: -40px;
   top: -40px;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
 .tool-tip__close-button:hover {
-  opacity: .7;
+  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -94,7 +94,7 @@
     padding: 25px 22px;
     margin: 0 19px;
   }
-  
+
   .tool-tip__close-button {
     width: 20px;
     min-height: 20px;
