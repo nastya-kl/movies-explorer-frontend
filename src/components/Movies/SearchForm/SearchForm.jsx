@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ onSearchMovies, movies, onSearchSavedMovies, onChecked, setMovies, setSavedMovies}) {
+function SearchForm({ onSearchMovies, movies, onSearchSavedMovies, onChecked, setMovies, setSavedMovies, handleOpenInfoToolTip}) {
   const [value, setValue] = React.useState("");
   const [isShort, setIsShort] = React.useState(false);
   const location = useLocation();
@@ -14,17 +14,20 @@ function SearchForm({ onSearchMovies, movies, onSearchSavedMovies, onChecked, se
   React.useEffect(() => {
     if (movies.length === 0 && value === '') {
       setDisabled(true);
-    } else if (movies.length !== 0 && value === '') {
+    } else if (location.pathname === '/movies' && movies.length !== 0 && value === '') {
+      setDisabled(true)
+    } else if (location.pathname === '/saved-movies' && movies.length !== 0 && value === '') {
       setDisabled(false)
     } else if (movies.length !== 0 && value !== '') {
       setDisabled(false)
     }
-  }, [movies, value])
+  }, [location.pathname, movies, value])
 
   const handleSubmitMoviesForm = (e) => {
     e.preventDefault();
     if (value === '') {
       setMovies([]);
+      handleOpenInfoToolTip(true, false, 'Введите ключевое слово для поиска');
     } else {
       onSearchMovies(value, isShort);
     }
@@ -34,6 +37,7 @@ function SearchForm({ onSearchMovies, movies, onSearchSavedMovies, onChecked, se
     e.preventDefault();
     if (value === '') {
       setSavedMovies([]);
+      handleOpenInfoToolTip(true, false, 'Введите ключевое слово для поиска');
     } else {
       onSearchSavedMovies(value, isShort);
     }

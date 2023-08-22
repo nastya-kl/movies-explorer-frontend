@@ -12,6 +12,7 @@ import Register from "../Register/Register";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 
@@ -24,6 +25,9 @@ function App() {
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isInfoToolTipOpened, setIsInfoToolTipOpened] = React.useState(false);
+  const [infoToolTipTitle, setInfoToolTipTitle] = React.useState("");
+  const [isInfoToolTipCorrect, setIsInfoToolTipCorrect] = React.useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,10 +40,20 @@ function App() {
           setSavedMovies(savedMovies.data);
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          console.log(err);
         });
     }
   }, [isLoggedIn]);
+
+  function handleOpenInfoToolTip(isOpen, isCorrect, title) {
+    setIsInfoToolTipOpened(isOpen);
+    setIsInfoToolTipCorrect(isCorrect);
+    setInfoToolTipTitle(title);
+  }
+
+  function handleCloseInfoToolTip() {
+    setIsInfoToolTipOpened(false);
+  }
 
   // Авторизация пользователя
   function handleLogin({ email, password }) {
@@ -49,15 +63,13 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
+          setIsLoggedIn(true);
           navigate("/movies", { replace: true });
         }
       })
-      .then(() => {
-        
-        setIsLoggedIn(true);
-      })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        handleOpenInfoToolTip(true, false, 'При входе произошла ошибка')
+        console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -71,9 +83,11 @@ function App() {
       .register({ name, email, password })
       .then(() => {
         handleLogin({ email, password });
+        handleOpenInfoToolTip(true, true, 'Вы успешно зарегистрировались');
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        handleOpenInfoToolTip(true, false, 'При регистрации произошла ошибка');
+        console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -94,9 +108,10 @@ function App() {
       .changeUserInfo(userInfo)
       .then((user) => {
         setCurrentUser(user.data);
+        handleOpenInfoToolTip(true, true, 'Данные успешно обновлены');
       })
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -111,7 +126,7 @@ function App() {
 
     if (isShort) {
       data = data.filter((movie) => movie.duration < 40);
-    }
+    } 
 
     if (data.length !== 0 && location.pathname === "/movies") {
       setFilteredMovies(data);
@@ -120,6 +135,7 @@ function App() {
     } else {
       setFilteredMovies([]);
       setFilteredSavedMovies([]);
+      handleOpenInfoToolTip(true, false, 'Фильм не найден');
     }
   }
 
@@ -135,7 +151,8 @@ function App() {
           handleFilterMovies(movies, inputValue, isShort);
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          handleOpenInfoToolTip(true, false, 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+          console.log(err);
         })
         .finally(() => {
           setIsLoading(false);
@@ -146,8 +163,6 @@ function App() {
     }
   }
 
-  console.log(filteredMovies);
-
   // Поиск сохраненных фильмов
   function handleSearchSavedMovies(inputValue, isShort) {
     handleFilterMovies(savedMovies, inputValue, isShort);
@@ -155,7 +170,7 @@ function App() {
 
   // Поиск короткометражек по нажатию на чекбокс
   function toggleCheckboxButton(inputValue, isShort) {
-    if (location.pathname === "/movies" && inputValue !== '') {
+    if (location.pathname === "/movies" && inputValue !== "") {
       handleSearchMovies(inputValue, isShort);
     } else if (location.pathname === "/saved-movies") {
       handleSearchSavedMovies(inputValue, isShort);
@@ -175,7 +190,7 @@ function App() {
           setSavedMovies((movies) => [...movies, savedMovie.data])
         )
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          console.log(err);
         });
     } else {
       const id = savedMovies.find(
@@ -190,7 +205,7 @@ function App() {
           );
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          console.log(err);
         });
     }
   }
@@ -199,16 +214,17 @@ function App() {
   function handleDeleteMovie(id) {
     mainApi
       .deleteMovie(id)
-      .then(() =>
-        setSavedMovies((movies) =>
-          movies.filter((savedMovie) => savedMovie._id !== id)
-        ),
-        setFilteredSavedMovies((movies) =>
-          movies.filter((savedMovie) => savedMovie._id !== id)
-        )
+      .then(
+        () =>
+          setSavedMovies((movies) =>
+            movies.filter((savedMovie) => savedMovie._id !== id)
+          ),
+          setFilteredSavedMovies((movies) =>
+            movies.filter((savedMovie) => savedMovie._id !== id)
+          )
       )
       .catch((err) => {
-        console.log(`Ошибка: ${err}`);
+        console.log(err);
       });
   }
 
@@ -227,7 +243,11 @@ function App() {
           }
         })
         .catch((err) => {
-          console.log(`Ошибка: ${err}`);
+          console.log(err);
+          setIsLoggedIn(false);
+          setCurrentUser({});
+          navigate('/signin', { replace: true });
+          handleOpenInfoToolTip(true, false, 'При проверке токена произошла ошибка, авторизуйтесь ещё раз');
         });
     }
   }
@@ -260,6 +280,7 @@ function App() {
                   onChecked={toggleCheckboxButton}
                   onSaveMovie={handleSaveMovie}
                   isLoading={isLoading}
+                  handleOpenInfoToolTip={handleOpenInfoToolTip}
                 />
               }
             />
@@ -272,10 +293,11 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   movies={savedMovies}
                   filteredSavedMovies={filteredSavedMovies}
-                  setSavedMovies={setSavedMovies}
+                  setSavedMovies={setFilteredSavedMovies}
                   onSearchSavedMovies={handleSearchSavedMovies}
                   onDeleteMovie={handleDeleteMovie}
                   onChecked={toggleCheckboxButton}
+                  handleOpenInfoToolTip={handleOpenInfoToolTip}
                 />
               }
             />
@@ -319,6 +341,14 @@ function App() {
 
           {!isPageNotFoundOpen && <Footer />}
         </div>
+
+        <InfoToolTip
+          isOpen={isInfoToolTipOpened}
+          title={infoToolTipTitle}
+          isCorrect={isInfoToolTipCorrect}
+          onClose={handleCloseInfoToolTip}
+        />
+
       </div>
     </CurrentUserContext.Provider>
   );
