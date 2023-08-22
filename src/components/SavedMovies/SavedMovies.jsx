@@ -14,3 +14,30 @@ function SavedMovies({ movies, filteredSavedMovies, onDeleteMovie, onSearchSaved
 }
 
 export default SavedMovies;
+
+
+// eslint-disable-next-line no-lone-blocks
+{/* <ul className='movies-list__container'>
+        {movies.map((movie, i) => (
+          location.pathname === '/movies' ? (
+          i < amountOfMovies && (
+            <MoviesCard
+              key={movie.id ?? movie._id}
+              movie={movie}
+              onSaveMovie={onSaveMovie}
+              onDeleteMovie={onDeleteMovie}
+              isSaved={isSaved}
+              savedMovies={savedMovies}
+            />)
+          ) : (
+            <MoviesCard
+              key={movie.id ?? movie._id}
+              movie={movie}
+              onSaveMovie={onSaveMovie}
+              onDeleteMovie={onDeleteMovie}
+              isSaved={isSaved}
+              savedMovies={savedMovies}
+            />
+          )
+        ))}
+      </ul> */}

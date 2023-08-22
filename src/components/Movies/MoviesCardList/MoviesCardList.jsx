@@ -2,20 +2,20 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from '../Preloader/Preloader';
+import Preloader from "../Preloader/Preloader";
+import useRenderMovies from "../../../hooks/useRenderMovies";
 
-function MoviesCardList({ movies, onSaveMovie, onDeleteMovie, isSaved, savedMovies, isLoading }) {
+function MoviesCardList({
+  movies,
+  onSaveMovie,
+  onDeleteMovie,
+  isSaved,
+  savedMovies,
+  isLoading,
+}) {
   const location = useLocation();
 
-  const [showedMovies, setShowedMovies] = React.useState([]);
-  const [amountOfMovies, setAmountOfMovies] = React.useState(0);
-  const [moreMovies, setMoreMovies] = React.useState(0);
-
-  function handleRenderingMovies() {
-    if (window.innerWidth ) {
-
-    }
-  }
+  const { amountOfMovies, handleShowMoreBtnClick, isShowMoreBtnVisible } = useRenderMovies({ movies });
 
   return (
     <section className='movies-list' aria-label='Секция с фильмами'>
@@ -24,20 +24,22 @@ function MoviesCardList({ movies, onSaveMovie, onDeleteMovie, isSaved, savedMovi
         <h2 className='movies-list__empty-text'>Ничего не найдено</h2>
       )}
       <ul className='movies-list__container'>
-        {movies.map((movie) => (
-          <MoviesCard
-            key={movie.id ?? movie._id}
-            movie={movie}
-            onSaveMovie={onSaveMovie}
-            onDeleteMovie={onDeleteMovie}
-            isSaved={isSaved}
-            savedMovies={savedMovies}
+        {movies.map((movie, i) => (
+          i < amountOfMovies && (
+            <MoviesCard
+              key={movie.id ?? movie._id}
+              movie={movie}
+              onSaveMovie={onSaveMovie}
+              onDeleteMovie={onDeleteMovie}
+              isSaved={isSaved}
+              savedMovies={savedMovies}
             />
-            ))}
+          )
+        ))}
       </ul>
-      {movies.length !== 0 && location.pathname === "/movies" && (
-        <button className='movies-list__show-more-btn'>Ещё</button>
-        )}
+      {isShowMoreBtnVisible && location.pathname === "/movies" && (
+        <button className='movies-list__show-more-btn' onClick={handleShowMoreBtnClick}>Ещё</button>
+      )}
     </section>
   );
 }
