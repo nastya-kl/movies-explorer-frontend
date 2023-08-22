@@ -22,6 +22,7 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
 
   const navigate = useNavigate();
@@ -31,47 +32,52 @@ function App() {
   React.useEffect(() => {
     if (isLoggedIn) {
       Promise.all([mainApi.getSavedMovies()])
-      .then(([savedMovies]) => {
-        setSavedMovies(savedMovies.data);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
+        .then(([savedMovies]) => {
+          setSavedMovies(savedMovies.data);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
     }
   }, [isLoggedIn]);
 
   // Авторизация пользователя
-  function handleLogin({email, password}) {
-    setIsLoading(true)
-    mainApi.authorize({email, password})
-      .then(res => {
-        if(res.token) {
+  function handleLogin({ email, password }) {
+    setIsLoading(true);
+    mainApi
+      .authorize({ email, password })
+      .then((res) => {
+        if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setIsLoggedIn(true);
           navigate("/movies", { replace: true });
         }
+      })
+      .then(() => {
+        
+        setIsLoggedIn(true);
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
   // Регистрация пользователя
   function handleRegister({ name, email, password }) {
-    setIsLoading(true)
-    mainApi.register({name, email, password})
+    setIsLoading(true);
+    mainApi
+      .register({ name, email, password })
       .then(() => {
-        handleLogin({email, password});
+        handleLogin({ email, password });
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
   // Выход из профиля
@@ -83,7 +89,7 @@ function App() {
 
   // Обновление информации пользователя
   function handleUpdateUserInfo(userInfo) {
-    setIsLoading(true)
+    setIsLoading(true);
     mainApi
       .changeUserInfo(userInfo)
       .then((user) => {
@@ -93,48 +99,67 @@ function App() {
         console.log(`Ошибка: ${err}`);
       })
       .finally(() => {
-        setIsLoading(false)
-      })
+        setIsLoading(false);
+      });
   }
 
-  // Поиск фильмов
-  function handleFilterMovies(movieData, inputValue) {
-    const data = movieData.filter((movie) => {
+  // Фильтрация фильмов
+  function handleFilterMovies(movieData, inputValue, isShort) {
+    let data = movieData.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(inputValue.toLowerCase());
     });
+
+    if (isShort) {
+      data = data.filter((movie) => movie.duration < 40);
+    }
 
     if (data.length !== 0 && location.pathname === "/movies") {
       setFilteredMovies(data);
     } else if (data.length !== 0 && location.pathname === "/saved-movies") {
-      setSavedMovies(data);
+      setFilteredSavedMovies(data);
     } else {
-      alert("Ничего не найдено");
+      setFilteredMovies([]);
+      setFilteredSavedMovies([]);
     }
   }
 
-  function handleSearchMovies(inputValue) {
+  // Поиск фильмов
+  function handleSearchMovies(inputValue, isShort) {
     setIsLoading(true);
 
     if (movies.length === 0) {
-      moviesApi.getMovies()
+      moviesApi
+        .getMovies()
         .then((movies) => {
           setMovies(movies);
-          handleFilterMovies(movies, inputValue);
+          handleFilterMovies(movies, inputValue, isShort);
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         })
         .finally(() => {
           setIsLoading(false);
-        })
+        });
     } else {
-      handleFilterMovies(movies, inputValue);
-      setIsLoading(false)
+      handleFilterMovies(movies, inputValue, isShort);
+      setIsLoading(false);
     }
   }
 
-  function handleSearchSavedMovies(inputValue) {
-    handleFilterMovies(savedMovies, inputValue);
+  console.log(filteredMovies);
+
+  // Поиск сохраненных фильмов
+  function handleSearchSavedMovies(inputValue, isShort) {
+    handleFilterMovies(savedMovies, inputValue, isShort);
+  }
+
+  // Поиск короткометражек по нажатию на чекбокс
+  function toggleCheckboxButton(inputValue, isShort) {
+    if (location.pathname === "/movies" && inputValue !== '') {
+      handleSearchMovies(inputValue, isShort);
+    } else if (location.pathname === "/saved-movies") {
+      handleSearchSavedMovies(inputValue, isShort);
+    }
   }
 
   // Нажатие на кнопку лайка фильма на главной странице
@@ -176,6 +201,9 @@ function App() {
       .deleteMovie(id)
       .then(() =>
         setSavedMovies((movies) =>
+          movies.filter((savedMovie) => savedMovie._id !== id)
+        ),
+        setFilteredSavedMovies((movies) =>
           movies.filter((savedMovie) => savedMovie._id !== id)
         )
       )
@@ -229,6 +257,7 @@ function App() {
                   savedMovies={savedMovies}
                   setMovies={setFilteredMovies}
                   onSearchMovies={handleSearchMovies}
+                  onChecked={toggleCheckboxButton}
                   onSaveMovie={handleSaveMovie}
                   isLoading={isLoading}
                 />
@@ -242,9 +271,11 @@ function App() {
                   element={SavedMovies}
                   isLoggedIn={isLoggedIn}
                   movies={savedMovies}
+                  filteredSavedMovies={filteredSavedMovies}
                   setSavedMovies={setSavedMovies}
                   onSearchSavedMovies={handleSearchSavedMovies}
                   onDeleteMovie={handleDeleteMovie}
+                  onChecked={toggleCheckboxButton}
                 />
               }
             />

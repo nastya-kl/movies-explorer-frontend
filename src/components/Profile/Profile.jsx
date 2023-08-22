@@ -69,6 +69,10 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
   function handleCancelClick() {
     setIsEdition(false);
     handleInputChanging();
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
   }
 
   return (

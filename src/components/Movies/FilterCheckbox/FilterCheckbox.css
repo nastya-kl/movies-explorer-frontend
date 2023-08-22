@@ -44,6 +44,11 @@
   position: relative;
 }
 
+.filter-checkbox__visible-switcher_status_disabled {
+  background-color: #797979;
+  cursor: default;
+}
+
 .filter-checkbox__visible-switcher::before {
   content: '';
 	position: absolute;

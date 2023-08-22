@@ -3,17 +3,30 @@ import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ onSearchMovies, onSearchSavedMovies, setMovies, setSavedMovies }) {
+function SearchForm({ onSearchMovies, movies, onSearchSavedMovies, onChecked, setMovies, setSavedMovies}) {
   const [value, setValue] = React.useState("");
+  const [isShort, setIsShort] = React.useState(false);
   const location = useLocation();
   const allMoviesPath = location.pathname === '/movies'
+
+  const [disabled, setDisabled] = React.useState(false);
+
+  React.useEffect(() => {
+    if (movies.length === 0 && value === '') {
+      setDisabled(true);
+    } else if (movies.length !== 0 && value === '') {
+      setDisabled(false)
+    } else if (movies.length !== 0 && value !== '') {
+      setDisabled(false)
+    }
+  }, [movies, value])
 
   const handleSubmitMoviesForm = (e) => {
     e.preventDefault();
     if (value === '') {
       setMovies([]);
     } else {
-      onSearchMovies(value);
+      onSearchMovies(value, isShort);
     }
   };
 
@@ -22,7 +35,7 @@ function SearchForm({ onSearchMovies, onSearchSavedMovies, setMovies, setSavedMo
     if (value === '') {
       setSavedMovies([]);
     } else {
-      onSearchSavedMovies(value);
+      onSearchSavedMovies(value, isShort);
     }
   };
 
@@ -40,7 +53,7 @@ function SearchForm({ onSearchMovies, onSearchSavedMovies, setMovies, setSavedMo
           Найти
         </button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox isShort={isShort} setIsShort={setIsShort} onChecked={onChecked} value={value} disabled={disabled} />
     </section>
   );
 }
