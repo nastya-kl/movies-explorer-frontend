@@ -6,20 +6,11 @@ function Register({onRegister, isLoading}) {
   const {
     values,
     handleChange,
-    setValues,
     errors,
     isFormValid,
     inputValidation,
   } = useValidateForm({});
   const { name, email, password } = values;
-
-  React.useEffect(() => {
-    setValues({
-      name: "Виталий",
-      email: "pochta@yandex.ru",
-      password: "12345678912345",
-    });
-  }, [setValues]);
 
   function handleSubmit(e) {
     e.preventDefault();

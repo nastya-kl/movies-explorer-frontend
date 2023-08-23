@@ -2,27 +2,18 @@ import React from "react";
 import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login({ setIsLoggedIn, onLogin, isLoading }) {
+function Login({ onLogin, isLoading }) {
   const {
     values,
     handleChange,
-    setValues,
     errors,
     isFormValid,
     inputValidation,
   } = useValidateForm({});
   const { email, password } = values;
 
-  React.useEffect(() => {
-    setValues({
-      email: "pochta@yandex.ru",
-      password: "12345678912345",
-    });
-  }, [setValues]);
-
   function handleSubmit(e) {
     e.preventDefault();
-    setIsLoggedIn(true);
     onLogin(values);
   }
 

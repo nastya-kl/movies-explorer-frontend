@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Route,
-  Routes,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -24,7 +18,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(localStorage.getItem('jwt') ? true : false);
   const [isPageNotFoundOpen, setIsPageNotFoundOpen] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
@@ -42,9 +36,10 @@ function App() {
   // Получить список сохранённых фильмов с бэка
   React.useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([mainApi.getSavedMovies()])
-        .then(([savedMovies]) => {
+      Promise.all([mainApi.getSavedMovies(), mainApi.getUserInfo()])
+        .then(([savedMovies, userData]) => {
           setSavedMovies(savedMovies.data);
+          setCurrentUser(userData);
         })
         .catch((err) => {
           console.log(err);
@@ -107,7 +102,7 @@ function App() {
   // Выход из профиля
   function handleLogout() {
     setIsLoggedIn(false);
-    localStorage.removeItem("jwt");
+    localStorage.clear();
     navigate("/signin", { replace: true });
   }
 
@@ -280,9 +275,20 @@ function App() {
 
   // Реализовать проверку токена
   React.useEffect(() => {
-    handleTokenCheck();
+    if (isLoggedIn) {
+      handleTokenCheck();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
+
+  React.useEffect(() => {
+    if (
+      (location.pathname === "/signup" || location.pathname === "/signin") &&
+      isLoggedIn
+    ) {
+      navigate('/', { replace: true });
+    }
+  }, [isLoggedIn, location.pathname, navigate]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -343,25 +349,17 @@ function App() {
             <Route
               path='/signin'
               element={
-                isLoggedIn ? (
-                  <Navigate to='/' replace />
-                ) : (
-                  <Login
-                    setIsLoggedIn={setIsLoggedIn}
-                    onLogin={handleLogin}
-                    isLoading={isLoading}
-                  />
-                )
+                <Login
+                  setIsLoggedIn={setIsLoggedIn}
+                  onLogin={handleLogin}
+                  isLoading={isLoading}
+                />
               }
             />
             <Route
               path='/signup'
               element={
-                isLoggedIn ? (
-                  <Navigate to='/' replace />
-                ) : (
-                  <Register onRegister={handleRegister} isLoading={isLoading} />
-                )
+                <Register onRegister={handleRegister} isLoading={isLoading} />
               }
             />
 

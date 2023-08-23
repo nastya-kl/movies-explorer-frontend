@@ -1,6 +1,6 @@
 class MainApi {
   constructor() {
-    this.baseUrl = "http://localhost:3000";
+    this.baseUrl = "https://api.movies.nastya-kl.nomoredomains.xyz";
   }
 
   _checkResponse(res) {
