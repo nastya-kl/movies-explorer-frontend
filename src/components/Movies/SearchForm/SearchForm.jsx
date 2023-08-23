@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { toolTipMessages } from "../../../utils/constants";
 
 function SearchForm({
   onSearchMovies,
@@ -56,7 +57,7 @@ function SearchForm({
     e.preventDefault();
     if (value === "") {
       setMovies([]);
-      handleOpenInfoToolTip(true, false, "Введите ключевое слово для поиска");
+      handleOpenInfoToolTip(true, false, toolTipMessages.moviesSearchError);
     } else {
       onSearchMovies(value, isShort);
     }
@@ -66,7 +67,7 @@ function SearchForm({
     e.preventDefault();
     if (value === "") {
       setSavedMovies([]);
-      handleOpenInfoToolTip(true, false, "Введите ключевое слово для поиска");
+      handleOpenInfoToolTip(true, false, toolTipMessages.moviesSearchError);
     } else {
       onSearchSavedMovies(value, isShort);
     }

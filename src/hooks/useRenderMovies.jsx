@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { windowInnerWidth } from "../utils/constants";
 
 function useRenderMovies({ movies }) {
   const [amountOfMovies, setAmountOfMovies] = React.useState(0);
@@ -10,10 +11,10 @@ function useRenderMovies({ movies }) {
 
   function handleRenderingMovies() {
     if (location.pathname === "/movies") {
-      if (window.innerWidth <= 540) {
+      if (window.innerWidth <= windowInnerWidth.mobile) {
         setAmountOfMovies(5);
         setMoreMovies(2);
-      } else if (window.innerWidth <= 990) {
+      } else if (window.innerWidth <= windowInnerWidth.tablet) {
         setAmountOfMovies(8);
         setMoreMovies(2);
       } else {

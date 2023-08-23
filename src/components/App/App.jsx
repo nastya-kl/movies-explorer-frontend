@@ -1,5 +1,11 @@
 import React from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -13,6 +19,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
+import { toolTipMessages } from "../../utils/constants";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 
@@ -32,7 +39,7 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Получить список всех фильмов с сервера BeatFilms и список сохранённых фильмо с бэка
+  // Получить список сохранённых фильмов с бэка
   React.useEffect(() => {
     if (isLoggedIn) {
       Promise.all([mainApi.getSavedMovies()])
@@ -45,12 +52,14 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  // Открыть попап с информацией для пользователя
   function handleOpenInfoToolTip(isOpen, isCorrect, title) {
     setIsInfoToolTipOpened(isOpen);
     setIsInfoToolTipCorrect(isCorrect);
     setInfoToolTipTitle(title);
   }
 
+  // Закрыть попап с информацией для пользователя
   function handleCloseInfoToolTip() {
     setIsInfoToolTipOpened(false);
   }
@@ -68,7 +77,8 @@ function App() {
         }
       })
       .catch((err) => {
-        handleOpenInfoToolTip(true, false, "При входе произошла ошибка");
+        handleOpenInfoToolTip(true, false, toolTipMessages.signinErrorMessage);
+        setIsLoggedIn(false);
         console.log(err);
       })
       .finally(() => {
@@ -83,10 +93,10 @@ function App() {
       .register({ name, email, password })
       .then(() => {
         handleLogin({ email, password });
-        handleOpenInfoToolTip(true, true, "Вы успешно зарегистрировались");
+        handleOpenInfoToolTip(true, true, toolTipMessages.signupSuccessMessage);
       })
       .catch((err) => {
-        handleOpenInfoToolTip(true, false, "При регистрации произошла ошибка");
+        handleOpenInfoToolTip(true, false, toolTipMessages.signupErrorMessage);
         console.log(err);
       })
       .finally(() => {
@@ -108,7 +118,11 @@ function App() {
       .changeUserInfo(userInfo)
       .then((user) => {
         setCurrentUser(user.data);
-        handleOpenInfoToolTip(true, true, "Данные успешно обновлены");
+        handleOpenInfoToolTip(
+          true,
+          true,
+          toolTipMessages.updateProfileSuccessMessage
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -162,7 +176,7 @@ function App() {
           handleOpenInfoToolTip(
             true,
             false,
-            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+            toolTipMessages.serverConnectionError
           );
           console.log(err);
         })
@@ -259,11 +273,7 @@ function App() {
           setIsLoggedIn(false);
           setCurrentUser({});
           navigate("/signin", { replace: true });
-          handleOpenInfoToolTip(
-            true,
-            false,
-            "При проверке токена произошла ошибка, авторизуйтесь ещё раз"
-          );
+          handleOpenInfoToolTip(true, false, toolTipMessages.tokenCheckError);
         });
     }
   }
@@ -333,17 +343,25 @@ function App() {
             <Route
               path='/signin'
               element={
-                <Login
-                  setIsLoggedIn={setIsLoggedIn}
-                  onLogin={handleLogin}
-                  isLoading={isLoading}
-                />
+                isLoggedIn ? (
+                  <Navigate to='/' replace />
+                ) : (
+                  <Login
+                    setIsLoggedIn={setIsLoggedIn}
+                    onLogin={handleLogin}
+                    isLoading={isLoading}
+                  />
+                )
               }
             />
             <Route
               path='/signup'
               element={
-                <Register onRegister={handleRegister} isLoading={isLoading} />
+                isLoggedIn ? (
+                  <Navigate to='/' replace />
+                ) : (
+                  <Register onRegister={handleRegister} isLoading={isLoading} />
+                )
               }
             />
 
