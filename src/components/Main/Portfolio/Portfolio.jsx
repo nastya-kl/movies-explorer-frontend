@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Portfolio.css";
 
 function Portfolio() {
@@ -9,34 +8,34 @@ function Portfolio() {
         <h3 className='portfolio__heading'>Портфолио</h3>
         <ul>
           <li className='portfolio__link'>
-            <Link
+            <a
               className='portfolio__text'
-              to='https://github.com/nastya-kl/how-to-learn'
-              target='blank'
+              href="https://github.com/nastya-kl/how-to-learn"
+              target='_blank'
               rel='noopener noreferrer'
             >
               Статичный сайт <div className='portfolio__arrow'></div>
-            </Link>
+            </a>
           </li>
           <li className='portfolio__link'>
-            <Link
+            <a
               className='portfolio__text'
-              to='https://nastya-kl.github.io/russian-travel/'
-              target='blank'
+              href='https://nastya-kl.github.io/russian-travel/'
+              target='_blank'
               rel='noopener noreferrer'
             >
               Адаптивный сайт <div className='portfolio__arrow'></div>
-            </Link>
+            </a>
           </li>
           <li className='portfolio__link'>
-            <Link
+            <a
               className='portfolio__text'
-              to='https://mesto.nastya-kll.nomoreparties.sbs'
-              target='blank'
+              href='https://github.com/nastya-kl/react-mesto-api-full-gha'
+              target='_blank'
               rel='noopener noreferrer'
             >
               Одностраничное приложение <div className='portfolio__arrow'></div>
-            </Link>
+            </a>
           </li>
         </ul>
       </nav>

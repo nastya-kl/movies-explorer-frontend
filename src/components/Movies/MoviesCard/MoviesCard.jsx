@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 
 function MoviesCard({
@@ -49,7 +49,7 @@ function MoviesCard({
 
   return (
     <li className='movie'>
-      <Link to={movie.trailerLink} target='blank'>
+      <a href={movie.trailerLink} target='_blank' rel='noopener noreferrer'>
         <img
           src={
             isSaved
@@ -59,7 +59,7 @@ function MoviesCard({
           className='movie__image'
           alt={`Обложка фильма ${movie.nameRU}`}
         />
-      </Link>
+      </a>
       <div className='movie__lower-part'>
         <h2 className='movie__title'>{movie.nameRU}</h2>
         <p className='movie__duration'>{setMovieDuration(movie.duration)}</p>
