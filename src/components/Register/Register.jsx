@@ -24,7 +24,7 @@ function Register({onRegister, isLoading}) {
       authPath='/signin'
       authWay='Войти'
     >
-      <form className='auth__form' onSubmit={handleSubmit} noValidate>
+      <form className='auth__form' onSubmit={handleSubmit} noValidate autocomplete="off">
         <div className='auth__inputs-container'>
           <label htmlFor='name' className='auth__label'>
             Имя
