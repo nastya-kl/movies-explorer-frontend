@@ -12,7 +12,10 @@ function Main({
   savedMovies,
   isLoading,
   handleOpenInfoToolTip,
+  pageText,
+  setPageText,
 }) {
+
   return (
     <main className='movies'>
       <SearchForm
@@ -21,12 +24,14 @@ function Main({
         setMovies={setMovies}
         onChecked={onChecked}
         handleOpenInfoToolTip={handleOpenInfoToolTip}
+        setText={setPageText}
       />
       <MoviesCardList
         movies={movies}
         onSaveMovie={onSaveMovie}
         savedMovies={savedMovies}
         isLoading={isLoading}
+        text={pageText}
       />
     </main>
   );

@@ -1,31 +1,20 @@
 import React from "react";
 import useValidateForm from "../../hooks/useValidateForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { profileUpdateErrors } from "../../utils/constants";
 import "./Profile.css";
 
 function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
-  const [errorText, setErrorText] = React.useState('');
-  const {
-    values,
-    handleChange,
-    errors,
-    setValues,
-    isFormValid,
-    setIsFormValid,
-  } = useValidateForm({});
+  const [errorText, setErrorText] = React.useState("");
+  const [isSameData, setIsSameData] = React.useState(true);
+
+  const { values, handleChange, errors, setValues, isFormValid } =
+    useValidateForm({});
   const { name, email } = values;
-
-  React.useEffect(() => {
-    if (!isFormValid) {
-      setErrorText('При обновлении профиля произошла ошибка');
-    } else {
-      setErrorText('')
-    }
-  }, [setErrorText, isFormValid])
-
+  
   React.useEffect(() => {
     setValues({
       name: currentUser.name,
@@ -34,10 +23,23 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
   }, [currentUser.email, currentUser.name, setValues]);
 
   React.useEffect(() => {
-    if (currentUser.name === name && currentUser.email === email) {
-      setIsFormValid(false);
+    if (isSameData) {
+      setErrorText(profileUpdateErrors.sameData);
+    } else if (!isFormValid && !isSameData) {
+      setErrorText(profileUpdateErrors.notValidData);
+    } else {
+      setErrorText("");
     }
-  }, [name, email, currentUser.name, currentUser.email, setIsFormValid]);
+  }, [setErrorText, isFormValid, isSameData]);
+
+
+  React.useEffect(() => {
+    if (currentUser.name === name && currentUser.email === email) {
+      setIsSameData(true);
+    } else {
+      setIsSameData(false);
+    }
+  }, [name, email, currentUser.name, currentUser.email, setIsSameData]);
 
   function handleInputChanging() {
     if (isEdition) {
@@ -54,6 +56,7 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
   function toggleEditButton() {
     setIsEdition(true);
     handleInputChanging();
+    setErrorText("");
   }
 
   function handleSubmit(e) {
@@ -85,6 +88,7 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
             <input
               type='text'
               name='name'
+              id='name'
               className='profile__input'
               placeholder='Введите имя'
               value={name || ""}
@@ -92,11 +96,13 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
               disabled
               required
               errors={errors}
+              minLength={2}
             />
             <label className='profile__label'>E-mail</label>
             <input
               type='email'
               name='email'
+              id='email'
               className='profile__input'
               placeholder='Введите E-mail'
               value={email || ""}
@@ -104,6 +110,7 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
               disabled
               required
               errors={errors}
+              minLength={3}
             />
           </div>
 
@@ -126,14 +133,21 @@ function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
                 <p className='profile__error-text'>{errorText}</p>
                 <button
                   className={`${
-                    !isFormValid ? "button__disabled" : "profile__save-button"
+                    !isFormValid || isSameData
+                      ? "button__disabled"
+                      : "profile__save-button"
                   }`}
                   type='submit'
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || isSameData || isLoading}
                 >
-                  {isLoading ? 'Сохранение...' : 'Сохранить'}
+                  {isLoading ? "Сохранение..." : "Сохранить"}
                 </button>
-                <button className="profile__cancel-button" onClick={handleCancelClick}>Отмена</button>
+                <button
+                  className='profile__cancel-button'
+                  onClick={handleCancelClick}
+                >
+                  Отмена
+                </button>
               </>
             )}
           </div>

@@ -12,6 +12,7 @@ function SearchForm({
   setMovies,
   setSavedMovies,
   handleOpenInfoToolTip,
+  setText
 }) {
   const [value, setValue] = React.useState("");
   const [isShort, setIsShort] = React.useState(false);
@@ -58,6 +59,7 @@ function SearchForm({
     if (value === "") {
       setMovies([]);
       handleOpenInfoToolTip(true, false, toolTipMessages.moviesSearchError);
+      setText('Ничего не найдено');
     } else {
       onSearchMovies(value, isShort);
     }
@@ -68,6 +70,7 @@ function SearchForm({
     if (value === "") {
       setSavedMovies([]);
       handleOpenInfoToolTip(true, false, toolTipMessages.moviesSearchError);
+      setText('Ничего не найдено');
     } else {
       onSearchSavedMovies(value, isShort);
     }

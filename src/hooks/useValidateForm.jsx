@@ -1,9 +1,10 @@
 import React from "react";
+const regEmail = RegExp(/^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/);
 
 function useValidateForm() {
   const [values, setValues] = React.useState({});
   const [errors, setErrors] = React.useState({});
-  const [isFormValid, setIsFormValid] = React.useState(true);
+  const [isFormValid, setIsFormValid] = React.useState(false);
   const [inputValidation, setinputValidation] = React.useState({
     name: true,
     email: true,
@@ -19,6 +20,15 @@ function useValidateForm() {
       ...inputValidation,
       [name]: event.target.checkValidity(),
     });
+
+    if (
+      !regEmail.test(event.target.form.querySelector("#email").value) &&
+      event.target.id === "email"
+    ) {
+      setIsFormValid(false);
+      setinputValidation({ ...inputValidation, email: false });
+      setErrors({ email: "Неверный формат почты" });
+    }
   };
 
   return {

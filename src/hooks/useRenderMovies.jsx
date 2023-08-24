@@ -1,6 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { windowInnerWidth } from "../utils/constants";
+import {
+  windowInnerWidth,
+  renderedMovies,
+  showedMoreMovies,
+} from "../utils/constants";
 
 function useRenderMovies({ movies }) {
   const [amountOfMovies, setAmountOfMovies] = React.useState(0);
@@ -12,14 +16,14 @@ function useRenderMovies({ movies }) {
   function handleRenderingMovies() {
     if (location.pathname === "/movies") {
       if (window.innerWidth <= windowInnerWidth.mobile) {
-        setAmountOfMovies(5);
-        setMoreMovies(2);
+        setAmountOfMovies(renderedMovies.mobile);
+        setMoreMovies(showedMoreMovies.mobile);
       } else if (window.innerWidth <= windowInnerWidth.tablet) {
-        setAmountOfMovies(8);
-        setMoreMovies(2);
+        setAmountOfMovies(renderedMovies.tablet);
+        setMoreMovies(showedMoreMovies.tablet);
       } else {
-        setAmountOfMovies(16);
-        setMoreMovies(4);
+        setAmountOfMovies(renderedMovies.desktop);
+        setMoreMovies(showedMoreMovies.desktop);
       }
     } else if (movies.length !== 0) {
       setAmountOfMovies(movies.length);
@@ -34,25 +38,25 @@ function useRenderMovies({ movies }) {
 
   React.useEffect(() => {
     if (amountOfMovies <= movies.length) {
-      setIsShowMoreBtnVisible(true)
+      setIsShowMoreBtnVisible(true);
     } else if (movies.length < amountOfMovies) {
-      setIsShowMoreBtnVisible(false)
+      setIsShowMoreBtnVisible(false);
     }
-  }, [amountOfMovies, movies.length])
+  }, [amountOfMovies, movies.length]);
 
   React.useEffect(() => {
     if (location.pathname === "/movies")
       window.addEventListener("resize", handleRenderingMovies);
     handleRenderingMovies();
     return () => window.removeEventListener("resize", handleRenderingMovies);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies]);
 
   return {
     amountOfMovies,
     moreMovies,
     isShowMoreBtnVisible,
-    handleShowMoreBtnClick
+    handleShowMoreBtnClick,
   };
 }
 

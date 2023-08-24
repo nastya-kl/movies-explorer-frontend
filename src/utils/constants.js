@@ -8,8 +8,27 @@ export const toolTipMessages = {
   moviesSearchError: "Введите ключевое слово для поиска"
 };
 
+export const profileUpdateErrors = {
+  sameData: 'Введите новые данные',
+  notValidData: 'Введены некорректные данные'
+}
+
 export const windowInnerWidth = {
   mobile: 540,
   tablet: 990,
   desktop: 1280
 };
+
+export const renderedMovies = {
+  mobile: 5,
+  tablet: 8,
+  desktop: 16
+}
+
+export const showedMoreMovies = {
+  mobile: 2,
+  tablet: 2,
+  desktop: 4
+}
+
+export const SHORT_MOVIE_DURATION = 40;

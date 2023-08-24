@@ -12,6 +12,7 @@ function MoviesCardList({
   isSaved,
   savedMovies,
   isLoading,
+  text
 }) {
   const location = useLocation();
 
@@ -22,7 +23,7 @@ function MoviesCardList({
     <section className='movies-list' aria-label='Секция с фильмами'>
       {isLoading && <Preloader />}
       {movies.length === 0 && !isLoading && (
-        <h2 className='movies-list__empty-text'>Ничего не найдено</h2>
+        <h2 className='movies-list__empty-text'>{text}</h2>
       )}
       <ul className='movies-list__container'>
         {movies.map(

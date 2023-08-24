@@ -40,6 +40,8 @@ function Register({onRegister, isLoading}) {
             onChange={handleChange}
             errors={errors}
             required
+            minLength={2}
+            disabled={isLoading}
           />
           <span className='input__error'>{errors.name}</span>
           <label htmlFor='email' className='auth__label'>
@@ -56,6 +58,8 @@ function Register({onRegister, isLoading}) {
             onChange={handleChange}
             errors={errors}
             required
+            minLength={3}
+            disabled={isLoading}
           />
           <span className='input__error'>{errors.email}</span>
           <label htmlFor='password' className='auth__label'>
@@ -72,13 +76,15 @@ function Register({onRegister, isLoading}) {
             onChange={handleChange}
             errors={errors}
             required
+            minLength={3}
+            disabled={isLoading}
           />
+          <span className='input__error'>{errors.password}</span>
         </div>
-        <span className='input__error'>{errors.password}</span>
         <button
-          className={`${!isFormValid ? "button__disabled" : "auth__button"}`}
+          className={`${!isFormValid || isLoading ? "button__disabled" : "auth__button"}`}
           type='submit'
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
         >
           {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>

@@ -13,7 +13,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
-import { toolTipMessages } from "../../utils/constants";
+import { toolTipMessages, SHORT_MOVIE_DURATION } from "../../utils/constants";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 
@@ -29,6 +29,7 @@ function App() {
   const [isInfoToolTipOpened, setIsInfoToolTipOpened] = React.useState(false);
   const [infoToolTipTitle, setInfoToolTipTitle] = React.useState("");
   const [isInfoToolTipCorrect, setIsInfoToolTipCorrect] = React.useState(false);
+  const [moviesListPageText, setMoviesListPageText ] = React.useState('Введите название фильма в строку поиска')
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -103,7 +104,7 @@ function App() {
   function handleLogout() {
     setIsLoggedIn(false);
     localStorage.clear();
-    navigate("/signin", { replace: true });
+    navigate("/", { replace: true });
   }
 
   // Обновление информации пользователя
@@ -134,7 +135,7 @@ function App() {
     });
 
     if (isShort) {
-      data = data.filter((movie) => movie.duration < 40);
+      data = data.filter((movie) => movie.duration < SHORT_MOVIE_DURATION);
     }
 
     if (data.length !== 0 && location.pathname === "/movies") {
@@ -153,6 +154,7 @@ function App() {
       setFilteredMovies([]);
       setFilteredSavedMovies([]);
       handleOpenInfoToolTip(true, false, "Фильм не найден");
+      setMoviesListPageText('Ничего не найдено');
     }
   }
 
@@ -260,7 +262,7 @@ function App() {
           if (res) {
             setIsLoggedIn(true);
             setCurrentUser(res.data);
-            navigate({ replace: false });
+            navigate(`${location.pathname}${location.search}`, { replace: true });
           }
         })
         .catch((err) => {
@@ -313,6 +315,8 @@ function App() {
                   onSaveMovie={handleSaveMovie}
                   isLoading={isLoading}
                   handleOpenInfoToolTip={handleOpenInfoToolTip}
+                  pageText={moviesListPageText}
+                  setPageText={setMoviesListPageText}
                 />
               }
             />
@@ -330,6 +334,8 @@ function App() {
                   onDeleteMovie={handleDeleteMovie}
                   onChecked={toggleCheckboxButton}
                   handleOpenInfoToolTip={handleOpenInfoToolTip}
+                  pageText={moviesListPageText}
+                  setPageText={setMoviesListPageText}
                 />
               }
             />

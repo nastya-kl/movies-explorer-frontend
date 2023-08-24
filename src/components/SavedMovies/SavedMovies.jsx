@@ -11,6 +11,8 @@ function SavedMovies({
   setSavedMovies,
   onChecked,
   handleOpenInfoToolTip,
+  pageText,
+  setPageText
 }) {
   return (
     <main className='saved-movies'>
@@ -20,11 +22,13 @@ function SavedMovies({
         onChecked={onChecked}
         movies={movies}
         handleOpenInfoToolTip={handleOpenInfoToolTip}
+        setText={setPageText}
       />
       <MoviesCardList
         movies={filteredSavedMovies.length === 0 ? movies : filteredSavedMovies}
         isSaved
         onDeleteMovie={onDeleteMovie}
+        text={pageText}
       />
     </main>
   );

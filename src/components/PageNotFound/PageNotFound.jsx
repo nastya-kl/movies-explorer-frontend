@@ -10,7 +10,7 @@ function PageNotFound({ setIsPageNotFoundOpen }) {
   }, [setIsPageNotFoundOpen]);
 
   function goToPreviousPage() {
-    navigate("/", { replace: true });
+    navigate(-1);
     setIsPageNotFoundOpen(false);
   }
 
