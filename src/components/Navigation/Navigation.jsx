@@ -7,8 +7,6 @@ function Navigation({isloggedIn}) {
   const body = document.querySelector("body");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
 
-  console.log(isBurgerMenuOpen);
-
   function handleBurgerBtnClick() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
     body.classList.toggle("body_status_locked");

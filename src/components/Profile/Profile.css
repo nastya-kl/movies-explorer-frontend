@@ -111,6 +111,17 @@
   opacity: .8;
 }
 
+.profile__error-text {
+  color: #FF004C;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  margin: 0 0 4px 0;
+  width: 100%;
+  padding: 0;
+}
+
 .profile__save-button {
   width: 100%;
   min-height: 45px;
@@ -128,6 +139,24 @@
 
 .profile__save-button:hover {
   opacity: .8;
+}
+
+.profile__cancel-button {
+  cursor: pointer;
+  color: #3456F3;
+  background-color: #202020;
+  border: none;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+  margin: 4px auto 0;
+  padding: 0;
+  transition: opacity .3s linear 0s;
+}
+
+.profile__cancel-button:hover {
+  opacity: .7;
 }
 
 @media screen and (max-width: 768px) {

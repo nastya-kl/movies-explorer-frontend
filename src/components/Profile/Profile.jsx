@@ -1,22 +1,45 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { profileUpdateErrors } from "../../utils/constants";
 import "./Profile.css";
 
-function Profile({ setIsLoggedIn, isLoggedIn }) {
-  const profileName = "Виталий";
-  const profileEmail = "pochta@yandex.ru";
-  const navigate = useNavigate();
+function Profile({ onLogout, onUpdateUserInfo, isLoading }) {
+  const currentUser = React.useContext(CurrentUserContext);
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
-  const { values, handleChange, errors, setValues, isFormValid } = ValidateForm(
-    {}
-  );
+  const [errorText, setErrorText] = React.useState("");
+  const [isSameData, setIsSameData] = React.useState(true);
+
+  const { values, handleChange, errors, setValues, isFormValid } =
+    useValidateForm({});
   const { name, email } = values;
+  
+  React.useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [currentUser.email, currentUser.name, setValues]);
 
   React.useEffect(() => {
-    setValues({ name: profileName, email: profileEmail });
-  }, [setValues]);
+    if (isSameData) {
+      setErrorText(profileUpdateErrors.sameData);
+    } else if (!isFormValid && !isSameData) {
+      setErrorText(profileUpdateErrors.notValidData);
+    } else {
+      setErrorText("");
+    }
+  }, [setErrorText, isFormValid, isSameData]);
+
+
+  React.useEffect(() => {
+    if (currentUser.name === name && currentUser.email === email) {
+      setIsSameData(true);
+    } else {
+      setIsSameData(false);
+    }
+  }, [name, email, currentUser.name, currentUser.email, setIsSameData]);
 
   function handleInputChanging() {
     if (isEdition) {
@@ -33,19 +56,27 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
   function toggleEditButton() {
     setIsEdition(true);
     handleInputChanging();
+    setErrorText("");
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsEdition(false);
     handleInputChanging();
+    onUpdateUserInfo({
+      name: values.name,
+      email: values.email,
+    });
   }
 
-  const handleSignout = () => {
-    navigate("/", { replace: true });
-    setIsLoggedIn(false);
-    console.log(isLoggedIn);
-  };
+  function handleCancelClick() {
+    setIsEdition(false);
+    handleInputChanging();
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }
 
   return (
     <main className='profile'>
@@ -57,6 +88,7 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
             <input
               type='text'
               name='name'
+              id='name'
               className='profile__input'
               placeholder='Введите имя'
               value={name || ""}
@@ -64,11 +96,13 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
               disabled
               required
               errors={errors}
+              minLength={2}
             />
             <label className='profile__label'>E-mail</label>
             <input
               type='email'
               name='email'
+              id='email'
               className='profile__input'
               placeholder='Введите E-mail'
               value={email || ""}
@@ -76,6 +110,7 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
               disabled
               required
               errors={errors}
+              minLength={3}
             />
           </div>
 
@@ -88,24 +123,32 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
                 >
                   Редактировать
                 </button>
-                <button
-                  className='profile__logout-button'
-                  onClick={handleSignout}
-                >
+                <button className='profile__logout-button' onClick={onLogout}>
                   Выйти из аккаунта
                 </button>
               </>
             )}
             {isEdition && (
-              <button
-                className={`${
-                  !isFormValid ? "button__disabled" : "profile__save-button"
-                }`}
-                type='submit'
-                disabled={!isFormValid}
-              >
-                Сохранить
-              </button>
+              <>
+                <p className='profile__error-text'>{errorText}</p>
+                <button
+                  className={`${
+                    !isFormValid || isSameData
+                      ? "button__disabled"
+                      : "profile__save-button"
+                  }`}
+                  type='submit'
+                  disabled={!isFormValid || isSameData || isLoading}
+                >
+                  {isLoading ? "Сохранение..." : "Сохранить"}
+                </button>
+                <button
+                  className='profile__cancel-button'
+                  onClick={handleCancelClick}
+                >
+                  Отмена
+                </button>
+              </>
             )}
           </div>
         </form>
