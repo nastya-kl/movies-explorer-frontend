@@ -24,7 +24,7 @@ function Register({onRegister, isLoading}) {
       authPath='/signin'
       authWay='Войти'
     >
-      <form className='auth__form' onSubmit={handleSubmit} noValidate autocomplete="off">
+      <form className='auth__form' onSubmit={handleSubmit} noValidate autoComplete="off">
         <div className='auth__inputs-container'>
           <label htmlFor='name' className='auth__label'>
             Имя
@@ -42,7 +42,7 @@ function Register({onRegister, isLoading}) {
             required
             minLength={2}
             disabled={isLoading}
-            autocomplete="off"
+            autoComplete="off"
           />
           <span className='input__error'>{errors.name}</span>
           <label htmlFor='email' className='auth__label'>
@@ -61,7 +61,7 @@ function Register({onRegister, isLoading}) {
             required
             minLength={3}
             disabled={isLoading}
-            autocomplete="off"
+            autoComplete="off"
           />
           <span className='input__error'>{errors.email}</span>
           <label htmlFor='password' className='auth__label'>
@@ -80,7 +80,7 @@ function Register({onRegister, isLoading}) {
             required
             minLength={3}
             disabled={isLoading}
-            autocomplete="off"
+            autoComplete="off"
           />
           <span className='input__error'>{errors.password}</span>
         </div>

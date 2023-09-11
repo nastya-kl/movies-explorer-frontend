@@ -24,7 +24,7 @@ function Login({ onLogin, isLoading }) {
       authPath='/signup'
       authWay='Регистрация'
     >
-      <form className='auth__form' onSubmit={handleSubmit} noValidate autocomplete="off">
+      <form className='auth__form' onSubmit={handleSubmit} noValidate autoComplete="off">
         <div className='auth__inputs-container'>
           <label htmlFor='email' className='auth__label'>
             E-mail
@@ -42,7 +42,7 @@ function Login({ onLogin, isLoading }) {
             required
             minLength={3}
             disabled={isLoading}
-            autocomplete="off"
+            autoComplete="off"
           />
           <span className='input__error'>{errors.email}</span>
           <label htmlFor='password' className='auth__label'>
@@ -61,7 +61,7 @@ function Login({ onLogin, isLoading }) {
             required
             minLength={3}
             disabled={isLoading}
-            autocomplete="off"
+            autoComplete="off"
           />
           <span className='input__error'>{errors.password}</span>
         </div>

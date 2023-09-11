@@ -37,10 +37,9 @@ function App() {
   // Получить список сохранённых фильмов с бэка
   React.useEffect(() => {
     if (isLoggedIn) {
-      Promise.all([mainApi.getSavedMovies(), mainApi.getUserInfo()])
-        .then(([savedMovies, userData]) => {
+      Promise.all([mainApi.getSavedMovies()])
+        .then(([savedMovies]) => {
           setSavedMovies(savedMovies.data);
-          setCurrentUser(userData);
         })
         .catch((err) => {
           console.log(err);
